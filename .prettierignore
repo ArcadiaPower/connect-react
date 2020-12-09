@@ -1,0 +1,13 @@
+.babelrc
+.eslintignore
+.gitignore
+.npmignore
+.npmrc
+.prettierignore
+
+.dependabot/
+.github/
+dist/
+ops/
+
+.DS_Store

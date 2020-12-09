@@ -1,0 +1,25 @@
+{
+  "env": {
+    "jest": true
+  },
+  "extends": [
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "comma-dangle": "never",
+    "implicit-arrow-linebreak": "off",
+    "one-var": "off",
+    "react/destructuring-assignment": "off",
+    "react/jsx-boolean-value": 0,
+    "react/jsx-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "simple-import-sort/sort": "off",
+    "sort-imports": "off",
+    "sort-keys": "off"
+  }
+}
