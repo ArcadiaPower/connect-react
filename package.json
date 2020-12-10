@@ -4,6 +4,9 @@
   "description": "React tool for integrating with Arcadia's utility credential sync service",
   "main": "index.js",
   "scripts": {
+    "docz:dev": "./node_modules/.bin/docz dev",
+    "docz:build": "./node_modules/.bin/docz build",
+    "docz:serve": "./node_modules/.bin/docz build && ./node_modules/.bin/docz serve",
     "build": "./node_modules/.bin/rollup -c",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx",
     "test": "./node_modules/.bin/jest"
@@ -31,6 +34,7 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-replace": "^2.3.4",
     "babel-eslint": "^10.1.0",
+    "docz": "^2.3.1",
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.0.0",
@@ -40,6 +44,8 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "rollup": "^2.34.2"
   },
   "peerDependencies": {

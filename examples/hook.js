@@ -9,21 +9,21 @@ const products = ['data_access', 'remittance'];
 const CreateCredentials = props => {
   const data = props.user;
 
-  const onEmit = useCallback((emitType, metadata) => {
+  const onEmit = (emitType, metadata) => {
     if (emitType === 'success') {
       // handle successful credential submission here
     } else if (emitType === 'error') {
       // handle unsuccessful credential submission here
     }
-  });
+  };
 
-  const onOpen = useCallback(() => {
+  const onOpen = () => {
     // optional - handle widget open here
-  }, []);
+  };
 
-  const onClose = useCallback(() => {
+  const onClose = () => {
     // optional - handle widget close here
-  }, []);
+  };
 
   const callbacks = { onEmit, onOpen, onClose };
 
