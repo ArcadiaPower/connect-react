@@ -38,11 +38,9 @@ const CreateCredentials = props => {
 
   const [{ loading, error }, openCredentialSync] = useCredentialSync(config);
 
-  const errorMessage = (
-    <div>Failed to load credential widget: {error.message}</div>
-  );
-
-  if (error) return errorMessage;
+  if (error) {
+    return <div>Failed to load credential widget: {error.message}</div>;
+  }
 
   return (
     <button
