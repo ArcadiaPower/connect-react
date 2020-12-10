@@ -2,15 +2,16 @@
   "env": {
     "jest": true
   },
+  "parser": "babel-eslint",
   "extends": [
-    "plugin:react-hooks/recommended",
-    "prettier"
+    "prettier",
+    "plugin:react-hooks/recommended"
   ],
   "plugins": [
     "prettier"
   ],
   "rules": {
-    "comma-dangle": "never",
+    "comma-dangle": 0,
     "implicit-arrow-linebreak": "off",
     "one-var": "off",
     "react/destructuring-assignment": "off",

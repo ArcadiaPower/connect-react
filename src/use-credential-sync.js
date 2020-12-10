@@ -4,7 +4,7 @@ import useScript from 'react-script-hook';
 const src = 'https://arcadia.com/developers/credential-sync/stable/';
 const loadError = 'Error loading Arcadia credential sync widget';
 
-const useCredentialSync = config => {
+export const useCredentialSync = config => {
   const [error, setError] = useState(undefined);
   const [factory, setFactory] = useState(undefined);
   const [credentialSync, setCredentialSync] = useState(undefined);
@@ -20,7 +20,7 @@ const useCredentialSync = config => {
     } else {
       setFactory(window._ArcadiaCredentialSync);
     }
-  }, [loading, error]);
+  }, [loading, scriptError]);
 
   const open = () => {
     if (!factory) return;
