@@ -53,6 +53,7 @@
     "react-dom": "^16.14.0"
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react-script-hook": "^1.2.1"
   }
 }

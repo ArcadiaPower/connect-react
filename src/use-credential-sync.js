@@ -26,7 +26,7 @@ export const useCredentialSync = config => {
     if (!factory) return;
 
     const onClose = () => {
-      config.onClose();
+      config?.onClose();
       setCredentialSync(undefined);
     };
 

@@ -4,16 +4,15 @@ import { useCredentialSync } from '@arcadia/credential-sync-react';
 
 const env = 'test';
 const accessToken = 'this_is_a_super_secret_token';
-const products = ['data_access', 'remittance'];
 
 const CreateCredentials = props => {
-  const data = props.user;
+  const data = props;
 
-  const onEmit = (emitType, metadata) => {
-    if (emitType === 'success') {
-      // handle successful credential submission here
-    } else if (emitType === 'error') {
-      // handle unsuccessful credential submission here
+  const onEmit = ({ error, data }) => {
+    if (error) {
+      // handle credential submission error here
+    } else if (data) {
+      // handle credential submission response here
     }
   };
 
@@ -30,7 +29,6 @@ const CreateCredentials = props => {
   const config = {
     env,
     accessToken,
-    products,
     data,
     callbacks,
     scope: 'create',
@@ -54,11 +52,9 @@ const CreateCredentials = props => {
 };
 
 CreateCredentials.propTypes = {
-  user: shape({
-    id: number.isRequired,
-    address: string,
-    email: string,
-  }),
+  userId: number.isRequired,
+  address: string,
+  email: string,
 };
 
 export default CreateCredentials;

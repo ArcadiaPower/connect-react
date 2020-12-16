@@ -5,30 +5,31 @@ import { withCredentialSync } from '@arcadia/credential-sync-react';
 const config = {
   env: 'test',
   accessToken: 'this_is_a_super_secret_token',
-  products: ['data_access', 'remittance'],
 };
 
 class CreateCredentials extends React.Component {
   static propTypes = {
-    user: shape({
-      id: number.isRequired,
-      address: string,
-      email: string,
-    }),
+    userId: number.isRequired,
+    address: string,
+    email: string,
     credentialSync: shape({
       ready: bool.isRequired,
       error: object,
-      openCredentialSync: func.isRequired,
+      open: func.isRequired,
+      setData: func.isRequired,
+      setCallbacks: func.isRequired,
     }),
   };
 
   constructor(props) {
     super(props);
-    this.credentialSync = props.credentialSync;
+    const { userId, address, email, credentialSync } = props;
+    this.data = { userId, address, email };
+    this.credentialSync = credentialSync;
   }
 
   componentDidMount() {
-    this.credentialSync.setData(this.props.user);
+    this.credentialSync.setData(this.data);
     this.credentialSync.setCallbacks({
       onEmit: this.onEmit,
       onOpen: this.onOpen,
@@ -36,11 +37,11 @@ class CreateCredentials extends React.Component {
     });
   }
 
-  onEmit(emitType, metadata) {
-    if (emitType === 'success') {
-      // handle successful credential submission here
-    } else if (emitType === 'error') {
-      // handle unsuccessful credential submission here
+  onEmit({ error, dadta }) {
+    if (error) {
+      // handle credential submission error here
+    } else if (data) {
+      // handle credential submission response here
     }
   }
 
@@ -60,11 +61,7 @@ class CreateCredentials extends React.Component {
     }
 
     return (
-      <button
-        type="button"
-        disabled={ready}
-        onClick={() => openCredentialSync()}
-      >
+      <button type="button" disabled={ready} onClick={() => open()}>
         Connect credentials
       </button>
     );
