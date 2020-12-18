@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
 import { number, shape, string } from 'prop-types';
 import { useCredentialSync } from '@arcadia/credential-sync-react';
 
-const env = 'test';
+const env = 'staging';
 const accessToken = 'this_is_a_super_secret_token';
 
 const CreateCredentials = props => {
