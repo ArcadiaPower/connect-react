@@ -1,5 +1,5 @@
 import { number, shape, string } from 'prop-types';
-import { useCredentialSync } from '@arcadia/credential-sync-react';
+import { useCredentialSync } from '@arcadia/utility-connect-react';
 
 const env = 'staging';
 const accessToken = 'this_is_a_super_secret_token';

@@ -1,2 +1,2 @@
-export { useCredentialSync } from './use-credential-sync';
-export { withCredentialSync } from './with-credential-sync';
+export { useUtilityConnect } from './use-utility-connect';
+export { withUtilityConnect } from './with-utility-connect';

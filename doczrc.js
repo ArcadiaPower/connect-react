@@ -1,5 +1,5 @@
 export default {
-  title: 'Arcadia credential sync widget',
+  title: 'Arcadia utility connect service',
   files: 'docz/*.mdx',
   menu: ['Overview', 'Documentation'],
 };

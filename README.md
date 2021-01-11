@@ -1,3 +1,3 @@
-# credential-sync-react
+# utility-connect-react
 
-React tool for integrating with Arcadia's utility credential sync service
+React tool for integrating with Arcadia's utility connect service

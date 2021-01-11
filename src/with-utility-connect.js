@@ -1,10 +1,10 @@
-import { useCredentialSync } from './use-credential-sync';
+import { useUtilityConnect } from './use-utility-connect';
 
-export const withCredentialSync = (Component, config) => props => {
+export const withUtilityConnect = (Component, config) => props => {
   const [data, setData] = useState(undefined);
   const [callbacks, setCallbacks] = useState(undefined);
 
-  const [{ loading, error }, open] = useCredentialSync({
+  const [{ loading, error }, open] = useUtilityConnect({
     ...config,
     callbacks,
   });

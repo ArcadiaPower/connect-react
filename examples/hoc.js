@@ -1,6 +1,6 @@
 import React from 'react';
 import { number, shape, string } from 'prop-types';
-import { withCredentialSync } from '@arcadia/credential-sync-react';
+import { withCredentialSync } from '@arcadia/utility-connect-react';
 
 const config = {
   env: 'test',

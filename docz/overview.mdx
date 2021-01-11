@@ -5,20 +5,20 @@ route: /
 
 # Overview
 
-This package is a React wrapper around Arcadia's credential sync component. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
+This package is a React wrapper around Arcadia's utility connect service. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
 ## Installation
 
 Via npm:
 
 ```
-npm i @arcadia-eng/credential-sync-react
+npm i @arcadia-eng/utility-connect-react
 ```
 
 Via yarn:
 
 ```
-yarn add @arcadia-eng/credential-sync-react
+yarn add @arcadia-eng/utility-connect-react
 ```
 
 ## Quick start
@@ -28,7 +28,7 @@ yarn add @arcadia-eng/credential-sync-react
 This is the recommended implementation strategy.
 
 ```javascript
-import { useCredentialSync } from '@arcadia/credential-sync-react';
+import { useUtilityConnect } from '@arcadia/utility-connect-react';
 
 const env = 'staging';
 const accessToken = 'this_is_a_super_secret_token';
@@ -38,9 +38,9 @@ const CreateCredentials = props => {
 
   const onEmit = ({ error, data }) => {
     if (error) {
-      // handle credential submission error here
+      // handle submission error here
     } else if (data) {
-      // handle credential submission response here
+      // handle submission response here
     }
   };
 
@@ -62,18 +62,14 @@ const CreateCredentials = props => {
     scope: 'create',
   };
 
-  const [{ loading, error }, openCredentialSync] = useCredentialSync(config);
+  const [{ loading, error }, open] = useUtilityConnect(config);
 
   if (error) {
     return <div>Failed to load credential widget: {error.message}</div>;
   }
 
   return (
-    <button
-      type="button"
-      disabled={loading}
-      onClick={() => openCredentialSync()}
-    >
+    <button type="button" disabled={loading} onClick={() => open()}>
       Connect credentials
     </button>
   );
@@ -87,7 +83,7 @@ export default CreateCredentials;
 We provide an HoC strategy in case you are using class components. Note that this implementation is still leveraging hooks under the hood.
 
 ```javascript
-import { withCredentialSync } from '@arcadia/credential-sync-react';
+import { withUtilityConnect } from '@arcadia/utility-connect-react';
 
 const config = {
   env: 'test',
@@ -142,5 +138,5 @@ class CreateCredentials extends React.Component {
   }
 }
 
-export default withCredentialSync(CreateCredentials);
+export default withUtilityConnect(CreateCredentials);
 ```
