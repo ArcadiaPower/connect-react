@@ -1,6 +1,6 @@
 import React from 'react';
 import { number, shape, string } from 'prop-types';
-import { withCredentialSync } from '@arcadia/utility-connect-react';
+import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const config = {
   env: 'test',
@@ -12,7 +12,7 @@ class CreateCredentials extends React.Component {
     userId: number.isRequired,
     address: string,
     email: string,
-    credentialSync: shape({
+    utilityConnect: shape({
       ready: bool.isRequired,
       error: object,
       open: func.isRequired,
@@ -23,14 +23,14 @@ class CreateCredentials extends React.Component {
 
   constructor(props) {
     super(props);
-    const { userId, address, email, credentialSync } = props;
+    const { userId, address, email, utilityConnect } = props;
     this.data = { userId, address, email };
-    this.credentialSync = credentialSync;
+    this.utilityConnect = utilityConnect;
   }
 
   componentDidMount() {
-    this.credentialSync.setData(this.data);
-    this.credentialSync.setCallbacks({
+    this.utilityConnect.setData(this.data);
+    this.utilityConnect.setCallbacks({
       onEmit: this.onEmit,
       onOpen: this.onOpen,
       onClose: this.onClose,
@@ -54,7 +54,7 @@ class CreateCredentials extends React.Component {
   }
 
   render() {
-    const { ready, error, open } = this.credentialSync;
+    const { ready, error, open } = this.utilityConnect;
 
     if (error) {
       return <div>Failed to load credential widget: {error.message}</div>;
@@ -68,4 +68,4 @@ class CreateCredentials extends React.Component {
   }
 }
 
-export default withCredentialSync(CreateCredentials, config);
+export default withUtilityConnect(CreateCredentials, config);

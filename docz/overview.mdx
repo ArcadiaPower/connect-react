@@ -93,14 +93,14 @@ const config = {
 class CreateCredentials extends React.Component {
   constructor(props) {
     super(props);
-    const { userId, address, email, credentialSync } = props;
+    const { userId, address, email, utilityConnect } = props;
     this.data = { userId, address, email };
-    this.credentialSync = credentialSync;
+    this.utilityConnect = utilityConnect;
   }
 
   componentDidMount() {
-    this.credentialSync.setData(this.data);
-    this.credentialSync.setCallbacks({
+    this.utilityConnect.setData(this.data);
+    this.utilityConnect.setCallbacks({
       onEmit: this.onEmit,
       onOpen: this.onOpen,
       onClose: this.onClose,
@@ -124,7 +124,7 @@ class CreateCredentials extends React.Component {
   }
 
   render() {
-    const { ready, error, open } = this.credentialSync;
+    const { ready, error, open } = this.utilityConnect;
 
     if (error) {
       return <div>Failed to load credential widget: {error.message}</div>;

@@ -1,38 +1,38 @@
 import { useState, useEffect } from 'react';
 import useScript from 'react-script-hook';
 
-const src = 'https://arcadia.com/developers/credential-sync/stable/';
-const loadError = 'Error loading Arcadia credential sync widget';
+const src = 'https://utility-connect-main.prod.arcadia.com/dist/index.js';
+const initializeErrorMessage = 'Error loading Arcadia utility connect widget';
 
 export const useUtilityConnect = config => {
-  const [error, setError] = useState(undefined);
-  const [factory, setFactory] = useState(undefined);
-  const [credentialSync, setCredentialSync] = useState(undefined);
+  const [initializeError, setInitializeError] = useState();
+  const [factory, setFactory] = useState();
+  const [utilityConnect, setUtilityConnect] = useState();
 
-  const [loading, scriptError] = useScript({ src, checkForExisting: true });
+  const [loading, error] = useScript({ src, checkForExisting: true });
 
   useEffect(() => {
-    if (loading || scriptError) return;
+    if (loading || error) return;
 
     const { _ArcadiaUtilityConnect } = window;
     if (!_ArcadiaUtilityConnect) {
-      setError(new Error(loadError));
+      setInitializeError(new Error(initializeErrorMessage));
     } else {
       setFactory(window._ArcadiaUtilityConnect);
     }
-  }, [loading, scriptError]);
+  }, [loading, error]);
 
   const open = () => {
     if (!factory) return;
 
     const onClose = () => {
       config?.onClose();
-      setCredentialSync(undefined);
+      setUtilityConnect(undefined);
     };
 
-    const credentialSync = factory.create({ ...config, onClose });
-    setCredentialSync(credentialSync);
+    const utilityConnect = factory.create({ ...config, onClose });
+    setUtilityConnect(utilityConnect);
   };
 
-  return [{ loading, error: scriptError || error }, open];
+  return [{ loading, error: error || initializeError }, open];
 };

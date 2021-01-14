@@ -11,7 +11,7 @@ export const withUtilityConnect = (Component, config) => props => {
 
   const ready = !loading && !error && !!data && !!callbacks;
 
-  const credentialSync = {
+  const utilityConnect = {
     ready,
     loading,
     error,
@@ -20,5 +20,5 @@ export const withUtilityConnect = (Component, config) => props => {
     setCallbacks,
   };
 
-  return <Component {...props} credentialSync={credentialSync} />;
+  return <Component {...props} utilityConnect={utilityConnect} />;
 };
