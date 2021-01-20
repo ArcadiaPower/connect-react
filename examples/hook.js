@@ -7,7 +7,6 @@ const client = 'Test Co.';
 const data = {
   user: {
     email: 'this_is_a_fake_email@example.com',
-    address: '123 Fake St',
     firstName: 'Falsey',
     lastName: 'Farsicle',
   },

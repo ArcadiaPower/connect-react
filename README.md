@@ -1,6 +1,6 @@
 ## @arcadia-eng/utility-connect-react
 
-This package is a React wrapper around Arcadia's utility connect service. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
+This package is a React wrapper around Arcadia's Utility Connect service. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
 ## Installation
 
@@ -71,6 +71,8 @@ export default withUtilityConnect(CreateCredentials, config);
 
 ## Documentation
 
+If you are looking for the API documentation, you can find that [here](https://arcadiapower.github.io/enterprise-api/).
+
 Please note that this package is still under active development and has yet to release a stable version. More comprehensive documentation will be released along with a stable version.
 
 ### Config options
@@ -83,17 +85,18 @@ Please note that this package is still under active development and has yet to r
 | `client`      | `string` | Name used to reference organization in app |                                      | Yes      |
 | `data`        | `object` | Data passed to the api                     |                                      | Yes      |
 | `callbacks`   | `object` | Callback functions                         |                                      | No       |
+| `uiTheme`     | `string` | UI color theme                             | `['light', 'dark']`                  | No       |
 
 #### scope
 
-Specifies the user flow.
+Specifies the user flow. Defaults to `create`.
 
-- `create`: Opens the utility connect service in the "create" flow - input credentials will be used to create a user and corresponding utility credential record.
-- `update`: Opens the utility connect service in the "update" flow - input credentials will be used to update an existing utility credential record. Requires that you add `user.id` and `utilityCredential.id` in the `data` object.
+- `create`: Opens the Utility Connect service in the "create" flow - input credentials will be used to create a user and corresponding utility credential record.
+- `update`: Opens the Utility Connect service in the "update" flow - input credentials will be used to update an existing utility credential record. Requires that you add `user.id` and `utilityCredential.id` in the `data` object.
 
 #### env
 
-Determines which API the utility connect front-end points to
+Determines which API the Utility Connect front-end points to
 
 - `local`: Use this if you are interfacing with a local API. **You will almost never need this option.**
 - `staging`: This references our staging API. Use this in your development and staging environments.
@@ -109,14 +112,13 @@ The name used to reference the client organization.
 
 #### data
 
-Data used to hydrate the utility connect front-end and interface with the API.
+Data used to hydrate the Utility Connect front-end and interface with the API.
 
 Expect data in this shape for the `create` scope:
 
 ```javascript
 {
   user: {
-    address: '123 Fake St.', // user's address
     email: 'fake_email@example.com', // user's email
     firstName: 'Falsey', // user's first name
     lastName: 'Farcicle' // user's last name
@@ -130,7 +132,6 @@ Expect data in this shape for the `update` scope:
 {
   user: {
     id: 1, // user's id in API
-    address: '123 Fake St.', // user's address
     email: 'fake_email@example.com', // user's email
     firstName: 'Falsey', // user's first name
     lastName: 'Farcicle' // user's last name
@@ -143,13 +144,13 @@ Expect data in this shape for the `update` scope:
 
 #### callbacks
 
-Callback functions triggered at key points in the utility connect flow. Expects an object with key/value pairs where keys are as documented below.
+Callback functions triggered at key points in the Utility Connect flow. Expects an object with key/value pairs where keys are as documented below.
 
 **`onEmit`**: callback function that is triggered when utility credentials are either created or updated in the API.
 
-**`onOpen`**: callback function that is triggered when the utility connect component is opened.
+**`onOpen`**: callback function that is triggered when the Utility Connect component is opened.
 
-**`onClose`**: callback function that is triggered when the utility connect component is closed.
+**`onClose`**: callback function that is triggered when the Utility Connect component is closed.
 
 ```javascript
 {
@@ -158,3 +159,7 @@ Callback functions triggered at key points in the utility connect flow. Expects 
   onClose: () => { ... }
 }
 ```
+
+#### uiTheme
+
+Determines the UI color theme. Defaults to `light`.

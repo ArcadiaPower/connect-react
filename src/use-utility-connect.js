@@ -53,7 +53,7 @@ export const useUtilityConnect = config => {
           setUtilityConnect(undefined);
         };
 
-        const callbacks = { ...config.callbacks, onClose };
+        const callbacks = { ...(config.callbacks || {}), onClose };
         const utilityConnect = factory.create({ ...config, callbacks });
         setUtilityConnect(utilityConnect);
       }
