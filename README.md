@@ -23,7 +23,7 @@ yarn add @arcadia-eng/utility-connect-react
 This is the recommended implementation strategy. See [/examples/hooks.js](./examples/hook.js) for the full example.
 
 ```javascript
-import { useUtilityConnect } from '@arcadia/utility-connect-react';
+import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const CreateCredentials = props => {
   const config = { ... };
@@ -45,7 +45,7 @@ export default CreateCredentials;
 We provide an HoC strategy in case you are using class components. Note that this implementation is still leveraging hooks under the hood. See [/examples/hoc.js](./examples/hoc.js) for the full example.
 
 ```javascript
-import { withUtilityConnect } from '@arcadia/utility-connect-react';
+import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const config = { ... };
 
@@ -82,6 +82,7 @@ Please note that this package is still under active development and has yet to r
 | `accessToken` | `string` | API token for authenticating requests      |                                      | Yes      |
 | `client`      | `string` | Name used to reference organization in app |                                      | Yes      |
 | `data`        | `object` | Data passed to the api                     |                                      | Yes      |
+| `callbacks`   | `object` | Callback functions                         |                                      | No       |
 
 #### scope
 
@@ -116,9 +117,9 @@ Expect data in this shape for the `create` scope:
 {
   user: {
     address: '123 Fake St.', // user's address
-    email: 'fake@email.com', // user's email
+    email: 'fake_email@example.com', // user's email
     firstName: 'Falsey', // user's first name
-    lastName: 'Farcicle', // user's last name
+    lastName: 'Farcicle' // user's last name
   }
 }
 ```
@@ -128,14 +129,32 @@ Expect data in this shape for the `update` scope:
 ```javascript
 {
   user: {
-    id: 1 // user's id in API
+    id: 1, // user's id in API
     address: '123 Fake St.', // user's address
-    email: 'fake@email.com', // user's email
+    email: 'fake_email@example.com', // user's email
     firstName: 'Falsey', // user's first name
-    lastName: 'Farcicle', // user's last name
+    lastName: 'Farcicle' // user's last name
   },
   utilityCredential: {
     id: 2 // utility credential id in API
   }
+}
+```
+
+#### callbacks
+
+Callback functions triggered at key points in the utility connect flow. Expects an object with key/value pairs where keys are as documented below.
+
+**`onEmit`**: callback function that is triggered when utility credentials are either created or updated in the API.
+
+**`onOpen`**: callback function that is triggered when the utility connect component is opened.
+
+**`onClose`**: callback function that is triggered when the utility connect component is closed.
+
+```javascript
+{
+  onEmit: ({ error, data }) => { ... },
+  onOpen: () => { ... },
+  onClose: () => { ... }
 }
 ```

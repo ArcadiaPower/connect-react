@@ -35,6 +35,10 @@ export const useUtilityConnect = config => {
     }
   }, [scriptLoading, scriptError]);
 
+  useEffect(() => {
+    if (scriptError) setError(scriptLoadError);
+  }, [scriptError, setError]);
+
   const open = async () => {
     if (!factory) return;
 
