@@ -1,12 +1,19 @@
-import { number, shape, string } from 'prop-types';
 import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const env = 'staging';
 const accessToken = 'this_is_a_super_secret_token';
+const client = 'Test Co.';
+
+const data = {
+  user: {
+    email: 'this_is_a_fake_eemail@gmail.com',
+    address: '123 Fake St',
+    firstName: 'Falsey',
+    lastName: 'Farsicle',
+  },
+};
 
 const CreateCredentials = props => {
-  const data = props;
-
   const onEmit = ({ error, data }) => {
     if (error) {
       // handle credential submission error here
@@ -28,6 +35,7 @@ const CreateCredentials = props => {
   const config = {
     env,
     accessToken,
+    client,
     data,
     callbacks,
     scope: 'create',
@@ -44,12 +52,6 @@ const CreateCredentials = props => {
       Connect credentials
     </button>
   );
-};
-
-CreateCredentials.propTypes = {
-  userId: number.isRequired,
-  address: string,
-  email: string,
 };
 
 export default CreateCredentials;

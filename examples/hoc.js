@@ -3,15 +3,22 @@ import { number, shape, string } from 'prop-types';
 import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const config = {
-  env: 'test',
+  env: 'staging',
+  client: 'Test Co.',
   accessToken: 'this_is_a_super_secret_token',
+};
+
+const data = {
+  user: {
+    email: 'this_is_a_fake_eemail@gmail.com',
+    address: '123 Fake St',
+    firstName: 'Falsey',
+    lastName: 'Farsicle',
+  },
 };
 
 class CreateCredentials extends React.Component {
   static propTypes = {
-    userId: number.isRequired,
-    address: string,
-    email: string,
     utilityConnect: shape({
       ready: bool.isRequired,
       error: object,
@@ -21,37 +28,30 @@ class CreateCredentials extends React.Component {
     }),
   };
 
-  constructor(props) {
-    super(props);
-    const { userId, address, email, utilityConnect } = props;
-    this.data = { userId, address, email };
-    this.utilityConnect = utilityConnect;
-  }
-
   componentDidMount() {
-    this.utilityConnect.setData(this.data);
-    this.utilityConnect.setCallbacks({
+    this.props.utilityConnect.setData(data);
+    this.props.utilityConnect.setCallbacks({
       onEmit: this.onEmit,
       onOpen: this.onOpen,
       onClose: this.onClose,
     });
   }
 
-  onEmit({ error, dadta }) {
+  onEmit = ({ error, data }) => {
     if (error) {
       // handle credential submission error here
     } else if (data) {
       // handle credential submission response here
     }
-  }
+  };
 
-  onOpen() {
+  onOpen = () => {
     // optional - handle widget open here
-  }
+  };
 
-  onClose() {
+  onClose = () => {
     // optional - handle widget close here
-  }
+  };
 
   render() {
     const { ready, error, open } = this.utilityConnect;

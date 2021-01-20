@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useUtilityConnect } from './use-utility-connect';
 
 export const withUtilityConnect = (Component, config) => props => {
@@ -6,6 +7,7 @@ export const withUtilityConnect = (Component, config) => props => {
 
   const [{ loading, error }, open] = useUtilityConnect({
     ...config,
+    data,
     callbacks,
   });
 

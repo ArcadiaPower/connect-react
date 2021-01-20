@@ -50,16 +50,9 @@ import { withUtilityConnect } from '@arcadia/utility-connect-react';
 const config = { ... };
 
 class CreateCredentials extends React.Component {
-  constructor(props) {
-    super(props);
-    const { userId, address, email, utilityConnect } = props;
-    this.data = { userId, address, email };
-    this.utilityConnect = utilityConnect;
-  }
-
   componentDidMount() {
-    this.utilityConnect.setData({ ... });
-    this.utilityConnect.setCallbacks({ ... });
+    this.props.utilityConnect.setData({ ... });
+    this.props.utilityConnect.setCallbacks({ ... });
   }
 
   render() {
