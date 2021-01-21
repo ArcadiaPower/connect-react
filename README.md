@@ -20,7 +20,7 @@ yarn add @arcadia-eng/utility-connect-react
 
 ### Hook implementation
 
-This is the recommended implementation strategy. See [/examples/hooks.js](./examples/hook.js) for the full example.
+This is the recommended implementation strategy. See [/examples/hooks.js](./examples/hook.js) for a full example with callback functions defined. Note the required configuration options [below](#config-options).
 
 ```javascript
 import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
@@ -42,7 +42,7 @@ export default CreateCredentials;
 
 ### HoC implementation
 
-We provide an HoC strategy in case you are using class components. Note that this implementation is still leveraging hooks under the hood. See [/examples/hoc.js](./examples/hoc.js) for the full example.
+We provide a HoC strategy in case you are using class components. Note that this implementation still leverages hooks under the hood. See [/examples/hoc.js](./examples/hoc.js) for the full example with callback functions defined. Note the required configuration options [below](#config-options)
 
 ```javascript
 import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
@@ -71,28 +71,28 @@ export default withUtilityConnect(CreateCredentials, config);
 
 ## Documentation
 
-If you are looking for the API documentation, you can find that [here](https://arcadiapower.github.io/enterprise-api/).
+Arcadia's Enterprise API documentation can be found [here](https://arcadiapower.github.io/enterprise-api/).
 
-Please note that this package is still under active development and has yet to release a stable version. More comprehensive documentation will be released along with a stable version.
+Please note that this package is still under active development and has yet to release a stable version. More comprehensive documentation will be released alongside a stable version of this package.
 
 ### Config options
 
-| Name          | Type     | Description                                | Options                              | Required |
-| ------------- | -------- | ------------------------------------------ | ------------------------------------ | -------- |
-| `scope`       | `string` | User flow type                             | `['create', 'update']`               | No       |
-| `env`         | `string` | API environment                            | `['local', 'staging', 'production']` | Yes      |
-| `accessToken` | `string` | API token for authenticating requests      |                                      | Yes      |
-| `client`      | `string` | Name used to reference organization in app |                                      | Yes      |
-| `data`        | `object` | Data passed to the api                     |                                      | Yes      |
-| `callbacks`   | `object` | Callback functions                         |                                      | No       |
-| `uiTheme`     | `string` | UI color theme                             | `['light', 'dark']`                  | No       |
+| Name          | Type     | Description                                | Options                              | Required | Default  |
+| ------------- | -------- | ------------------------------------------ | ------------------------------------ | -------- | -------  |
+| `scope`       | `string` | User flow type                             | `['create', 'update']`               | No       | 'create' |
+| `env`         | `string` | API environment                            | `['local', 'staging', 'production']` | Yes      | none     |
+| `accessToken` | `string` | API token for authenticating requests      |                                      | Yes      | none     |
+| `client`      | `string` | Name used to reference organization in app |                                      | Yes      | none     |
+| `data`        | `object` | Data passed to the api                     |                                      | Yes      | none     |
+| `callbacks`   | `object` | Callback functions                         |                                      | No       | none     |
+| `uiTheme`     | `string` | UI color theme                             | `['light', 'dark']`                  | No       | 'light'  |
 
 #### scope
 
 Specifies the user flow. Defaults to `create`.
 
-- `create`: Opens the Utility Connect service in the "create" flow - input credentials will be used to create a user and corresponding utility credential record.
-- `update`: Opens the Utility Connect service in the "update" flow - input credentials will be used to update an existing utility credential record. Requires that you add `user.id` and `utilityCredential.id` in the `data` object.
+- `create`: Opens the Utility Connect service in the "create user" flow - input credentials will be used to create a user and corresponding utility credential record.
+- `update`: Opens the Utility Connect service in the "update utility credentials" flow - input credentials will be used to update an existing utility credential record. This flow requires that you add `user.id` and `utilityCredential.id` into the `data` object.
 
 #### env
 
@@ -104,7 +104,15 @@ Determines which API the Utility Connect front-end points to
 
 #### accessToken
 
-Token used to authenticate API requests. If you are integrating with this tool you should have instructions on how to generate such a token. Future documentation will be built out to explicitly document this process.
+This is the token used to authenticate API requests. If you are integrating with this tool you should have instructions on how to generate tokens for your client. Note that the type of `accessToken` needed to instantiate the component depends on the "user flow."
+
+#### `create` scope
+
+The component needs a standard server-side generated access token. More details on generating standard server-side tokens can be found in the [API documentation](https://arcadiapower.github.io/enterprise-api/).
+
+#### `update` scope
+
+The `accessToken` must be scoped to the user in order to update a user's utility credentials. More details on creating scoped tokens can be found in the [API documentation](https://arcadiapower.github.io/enterprise-api/).
 
 #### client
 
@@ -114,27 +122,28 @@ The name used to reference the client organization.
 
 Data used to hydrate the Utility Connect front-end and interface with the API.
 
-Expect data in this shape for the `create` scope:
+#### `create` scope
+
+Data is expected in the following format for the `create` scope:
 
 ```javascript
 {
   user: {
     email: 'fake_email@example.com', // user's email
-    firstName: 'Falsey', // user's first name
-    lastName: 'Farcicle' // user's last name
+    firstName: 'First', // user's first name
+    lastName: 'Last' // user's last name
   }
 }
 ```
 
-Expect data in this shape for the `update` scope:
+#### `update` scope
+
+Data is expected in the following format for the `update` scope:
 
 ```javascript
 {
   user: {
     id: 1, // user's id in API
-    email: 'fake_email@example.com', // user's email
-    firstName: 'Falsey', // user's first name
-    lastName: 'Farcicle' // user's last name
   },
   utilityCredential: {
     id: 2 // utility credential id in API
