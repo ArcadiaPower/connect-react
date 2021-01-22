@@ -49,7 +49,7 @@ export const useUtilityConnect = config => {
         setError(getConfigError(configErrors));
       } else {
         const onClose = () => {
-          config?.callbacks?.onClose();
+          config?.callbacks?.onClose?.();
           setUtilityConnect(undefined);
         };
 
