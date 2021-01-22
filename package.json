@@ -1,6 +1,6 @@
 {
   "name": "@arcadia-eng/utility-connect-react",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "description": "React tool for integrating with Arcadia's utility connect service",
   "main": "dist/index.js",
   "scripts": {
