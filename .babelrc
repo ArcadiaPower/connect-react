@@ -2,7 +2,8 @@
   "presets": ["@babel/preset-react", "@babel/preset-env"],
   "plugins": [
     "@babel/plugin-proposal-optional-chaining",
-    "@babel/plugin-transform-modules-commonjs"
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/transform-runtime"
   ],
   "env": {
     "test": {
