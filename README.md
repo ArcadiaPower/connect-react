@@ -78,7 +78,7 @@ Please note that this package is still under active development and has yet to r
 ### Config options
 
 | Name          | Type     | Description                                | Options                              | Required | Default  |
-| ------------- | -------- | ------------------------------------------ | ------------------------------------ | -------- | -------  |
+| ------------- | -------- | ------------------------------------------ | ------------------------------------ | -------- | -------- |
 | `scope`       | `string` | User flow type                             | `['create', 'update']`               | No       | 'create' |
 | `env`         | `string` | API environment                            | `['local', 'staging', 'production']` | Yes      | none     |
 | `accessToken` | `string` | API token for authenticating requests      |                                      | Yes      | none     |
@@ -132,9 +132,19 @@ Data is expected in the following format for the `create` scope:
     email: 'fake_email@example.com', // user's email
     firstName: 'First', // user's first name
     lastName: 'Last' // user's last name
+    zipCode: '20009' // user's zip code (optional)
   }
 }
 ```
+
+##### user options
+
+| User Options | Description       | Required |
+| ------------ | ----------------- | -------- |
+| `email`      | user's email      | yes      |
+| `firstName`  | user's first name | yes      |
+| `lastName`   | user's last name  | yes      |
+| `zipCode`    | user's zip code   | no       |
 
 #### `update` scope
 
@@ -143,13 +153,25 @@ Data is expected in the following format for the `update` scope:
 ```javascript
 {
   user: {
-    id: 1, // user's id in API
+    id: 1, // user's id in the API
   },
   utilityCredential: {
-    id: 2 // utility credential id in API
+    id: 2 // utility credential id in the API
   }
 }
 ```
+
+##### user options
+
+| User Options | Description          | Required |
+| ------------ | -------------------- | -------- |
+| `id `        | user's id in the API | yes      |
+
+##### utility credential options
+
+| Utility Credential Options | Description                      | Required |
+| -------------------------- | -------------------------------- | -------- |
+| `id `                      | utility credential id in the API | yes      |
 
 #### callbacks
 
