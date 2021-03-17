@@ -1,7 +1,6 @@
 import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const env = 'staging';
-const accessToken = 'this_is_a_super_secret_token';
 const client = 'Test Co.';
 
 const data = {
@@ -33,7 +32,6 @@ const CreateCredentials = props => {
 
   const config = {
     env,
-    accessToken,
     client,
     data,
     callbacks,
@@ -47,7 +45,11 @@ const CreateCredentials = props => {
   }
 
   return (
-    <button type="button" disabled={loading} onClick={() => open()}>
+    <button
+      type="button"
+      disabled={loading}
+      onClick={() => open('this_is_a_super_secret_token')}
+    >
       Connect credentials
     </button>
   );

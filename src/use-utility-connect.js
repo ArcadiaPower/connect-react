@@ -39,12 +39,14 @@ export const useUtilityConnect = config => {
     if (scriptError) setError(scriptLoadError);
   }, [scriptError, setError]);
 
-  const open = async () => {
+  const open = async accessToken => {
     if (!factory) return;
 
     setLoading(true);
     try {
-      const configErrors = await factory.validate(config);
+      const args = { ...config, accessToken };
+
+      const configErrors = await factory.validate(args);
       if (configErrors) {
         setError(getConfigError(configErrors));
       } else {
@@ -53,8 +55,8 @@ export const useUtilityConnect = config => {
           setUtilityConnect(undefined);
         };
 
-        const callbacks = { ...(config.callbacks || {}), onClose };
-        const utilityConnect = factory.create({ ...config, callbacks });
+        const callbacks = { ...(args.callbacks || {}), onClose };
+        const utilityConnect = factory.create({ ...args, callbacks });
         setUtilityConnect(utilityConnect);
       }
       setLoading(false);
