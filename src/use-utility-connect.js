@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useScript from 'react-script-hook';
 
-const src = 'https://utility-connect-main.prod.arcadia.com/dist/index.js';
+const src = 'https://utility-connect-main.prod.arcadia.com/dist/v1.js';
 
 const scriptLoadError =
   'Error fetching script - please check your internet connection.';
