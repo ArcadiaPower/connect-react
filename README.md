@@ -32,10 +32,10 @@ import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
 const CreateCredentials = props => {
   const config = { ... };
 
-  const [{ loading, error }, open] = useUtilityConnect(config);
+  const [{ loading, error }, open] = useUtilityConnect();
 
   return (
-    <button type="button" disabled={loading} onClick={() => open(accessToken)}>
+    <button type="button" disabled={loading} onClick={() => open(config)}>
       Connect credentials
     </button>
   );
@@ -63,7 +63,7 @@ class CreateCredentials extends React.Component {
     const { ready, error, open } = this.utilityConnect;
 
     return (
-      <button type="button" disabled={ready} onClick={() => open(accessToken)}>
+      <button type="button" disabled={ready} onClick={() => open(config)}>
         Connect credentials
       </button>
     );
@@ -81,14 +81,15 @@ Please note that this package is still under active development and has yet to r
 
 ### Config options
 
-| Name        | Type     | Description                                | Options                              | Required | Default  |
-| ----------- | -------- | ------------------------------------------ | ------------------------------------ | -------- | -------- |
-| `scope`     | `string` | User flow type                             | `['create', 'update']`               | No       | 'create' |
-| `env`       | `string` | API environment                            | `['local', 'staging', 'production']` | Yes      | none     |
-| `client`    | `string` | Name used to reference organization in app |                                      | Yes      | none     |
-| `data`      | `object` | Data passed to the api                     |                                      | Yes      | none     |
-| `callbacks` | `object` | Callback functions                         |                                      | No       | none     |
-| `uiTheme`   | `string` | UI color theme                             | `['light', 'dark']`                  | No       | 'light'  |
+| Name          | Type     | Description                                | Options                              | Required | Default  |
+| ------------- | -------- | ------------------------------------------ | ------------------------------------ | -------- | -------- |
+| `scope`       | `string` | User flow type                             | `['create', 'update']`               | No       | 'create' |
+| `env`         | `string` | API environment                            | `['local', 'staging', 'production']` | Yes      | none     |
+| `accessToken` | `string` | API token for authenticating requests      |                                      | Yes      | none     |
+| `client`      | `string` | Name used to reference organization in app |                                      | Yes      | none     |
+| `data`        | `object` | Data passed to the api                     |                                      | Yes      | none     |
+| `callbacks`   | `object` | Callback functions                         |                                      | No       | none     |
+| `uiTheme`     | `string` | UI color theme                             | `['light', 'dark']`                  | No       | 'light'  |
 
 #### scope
 
@@ -112,6 +113,10 @@ The component needs a standard server-side generated access token. More details 
 #### `update` scope
 
 The `accessToken` must be scoped to the user in order to update a user's utility credentials. More details on creating scoped tokens can be found in the [API documentation](https://arcadiapower.github.io/enterprise-api/).
+
+#### accessToken
+
+This is the token used to authenticate API requests. If you are integrating with this tool you should have instructions on how to generate tokens for your client. Note that the type of `accessToken` needed to instantiate the component depends on the "user flow."
 
 #### client
 

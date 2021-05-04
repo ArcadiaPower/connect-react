@@ -2,6 +2,7 @@ import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const env = 'staging';
 const client = 'Test Co.';
+const accessToken = 'this_is_a_super_secret_token';
 
 const data = {
   user: {
@@ -38,18 +39,14 @@ const CreateCredentials = props => {
     scope: 'create',
   };
 
-  const [{ loading, error }, open] = useUtilityConnect(config);
+  const [{ loading, error }, open] = useUtilityConnect();
 
   if (error) {
     return <div>Failed to load credential widget: {error.message}</div>;
   }
 
   return (
-    <button
-      type="button"
-      disabled={loading}
-      onClick={() => open('this_is_a_super_secret_token')}
-    >
+    <button type="button" disabled={loading} onClick={() => open(config)}>
       Connect credentials
     </button>
   );

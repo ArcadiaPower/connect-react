@@ -13,7 +13,7 @@ const getConfigError = errors => {
   return new Error(`Error setting configuration variables: ${message}`);
 };
 
-export const useUtilityConnect = config => {
+export const useUtilityConnect = () => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [factory, setFactory] = useState();
@@ -39,14 +39,12 @@ export const useUtilityConnect = config => {
     if (scriptError) setError(scriptLoadError);
   }, [scriptError, setError]);
 
-  const open = async accessToken => {
+  const open = async config => {
     if (!factory) return;
 
     setLoading(true);
     try {
-      const args = { ...config, accessToken };
-
-      const configErrors = await factory.validate(args);
+      const configErrors = await factory.validate(config);
       if (configErrors) {
         setError(getConfigError(configErrors));
       } else {
@@ -55,8 +53,8 @@ export const useUtilityConnect = config => {
           setUtilityConnect(undefined);
         };
 
-        const callbacks = { ...(args.callbacks || {}), onClose };
-        const utilityConnect = factory.create({ ...args, callbacks });
+        const callbacks = { ...(config.callbacks || {}), onClose };
+        const utilityConnect = factory.create({ ...config, callbacks });
         setUtilityConnect(utilityConnect);
       }
       setLoading(false);
