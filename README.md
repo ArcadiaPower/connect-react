@@ -26,7 +26,7 @@ The Utility Connect widget can be instantiated for one of two user flows:
 
 The user flow is selected with the `config.scope` parameter described in the component API Reference below.
 
-Note that instantiating the Utility Connect widget requires an OAuth access token scoped to your user in order to authenticate API requests. See [Creating OAuth Tokens](https://developers.arcadia.com/#operation/createOAuthToken) for instructions. Note that the type of token differs if you are creating a user or updating a user -- see `config.accessToken` in the component API Reference below for details.
+Note that instantiating the Utility Connect widget requires a one-time-use OAuth access token in order to authenticate API requests. See [Creating OAuth Tokens](https://developers.arcadia.com/#operation/createOAuthToken) for instructions. Note that the type of token to use (`grant_type`) differs if you are creating a user or updating a user -- see `config.accessToken` in the component API Reference below for details.
 
 ## Hook implementation
 
