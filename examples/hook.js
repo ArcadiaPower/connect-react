@@ -1,6 +1,6 @@
 import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
-const env = 'staging';
+const env = 'sandbox';
 const client = 'Test Co.';
 const accessToken = 'this_is_a_super_secret_token';
 
