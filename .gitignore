@@ -4,3 +4,7 @@
 /node_modules/
 /dist/
 /coverage/
+
+# IDE's
+.idea
+.vscode
