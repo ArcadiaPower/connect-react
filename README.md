@@ -181,17 +181,23 @@ Data is expected in the following format for the `update` scope:
 
 Callback functions triggered at key points in the Utility Connect flow. Expects an object with key/value pairs where keys are as documented below.
 
-**`onEmit`**: callback function that is triggered when utility credentials are either created or updated in the API.
+**`onClose`**: callback function that is triggered when the Utility Connect component is closed.
+
+**`onError`**: callback function that is triggered when an error occurs within the application.
 
 **`onOpen`**: callback function that is triggered when the Utility Connect component is opened.
 
-**`onClose`**: callback function that is triggered when the Utility Connect component is closed.
+**`onSuccess`**: callback function that is triggered when utility credentials are successfully verified.
+
+**`onTimeout`**: callback function that is triggered when the Utility Connect component timesout while trying to validate utility credentials.
 
 ```javascript
 {
-  onEmit: ({ error, data }) => { ... },
+  onClose: () => { ... },
+  onError: () => { ... },
   onOpen: () => { ... },
-  onClose: () => { ... }
+  onSuccess: ({ data }) => { ... },
+  onTimeout: ({ data }) => { ... }
 }
 ```
 
