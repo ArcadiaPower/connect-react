@@ -103,7 +103,7 @@ Specifies the user flow. Defaults to `create`.
 Determines which API the Utility Connect front-end points to
 
 - `local`: Use this if you are interfacing with a local API. **You will almost never need this option.**
-- `sandbox`: This references our sandbox API. Use this in your development and staging environments.
+- `sandbox`: This references our sandbox API. Use this in your development, staging or test environments.
 - `production`: This references our production API. **Only use this in your production app.**
 
 #### `create` scope
