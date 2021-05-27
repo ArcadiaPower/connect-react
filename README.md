@@ -183,23 +183,51 @@ Callback functions triggered at key points in the Utility Connect flow. Expects 
 
 **`onClose`**: callback function that is triggered when the Utility Connect component is closed.
 
-**`onError`**: callback function that is triggered when an error occurs within the application.
+**`onError`**: callback function that is triggered when an error occurs during the Utility Connect flow.
 
 **`onOpen`**: callback function that is triggered when the Utility Connect component is opened.
 
 **`onSuccess`**: callback function that is triggered when utility credentials are successfully verified.
 
-**`onTimeout`**: callback function that is triggered when the Utility Connect component timesout while trying to validate utility credentials.
+**`onTimeout`**: callback function that is triggered when the Utility Connect component times out awaiting verification of the utility credentials.
 
 ```javascript
 {
   onClose: () => { ... },
-  onError: () => { ... },
+  onError: ({ error }) => { ... },
   onOpen: () => { ... },
-  onSuccess: ({ data }) => { ... },
-  onTimeout: ({ data }) => { ... }
+  onSuccess: ({ data: UtilityCredentialObject }) => { ... },
+  onTimeout: ({ data: UtilityCredentialObject }) => { ... }
 }
 ```
+
+Where the `UtilityCredentialObject` looks like the following:
+
+```javascript
+{
+  id: 12345
+  user_id: 54321,
+  utility_id: 2234,
+  username: great_customer,
+  verification_status: 'unverified',
+  flags: [],
+  verification_updated_at: '2021-01-24T14:15:23Z',
+  created_at: '2021-01-24T14:15:22Z',
+  updated_at: '2021-01-24T14:15:22Z'
+}
+```
+
+| Key                       | Type    | Desc                                                                                |
+| ------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `id`                      | Integer | The utility credential id                                                           |
+| `user_id`                 | Integer | The user id                                                                         |
+| `utility_id`              | Integer | The utility id                                                                      |
+| `username`                | String  | The username for the utility credential                                             |
+| `verification_status`     | String  | The current verification status -- may be unverified or correct                     |
+| `flags`                   | Array   | Flags on the utility credential. A detailed list can be found in the developer docs |
+| `verification_updated_at` | Date    | The timestamp for the last verification status change                               |
+| `created_at`              | Date    | The timestamp for when the record was created                                       |
+| `updated_at`              | Date    | The timestamp for when the record was last updated                                  |
 
 #### uiTheme
 
