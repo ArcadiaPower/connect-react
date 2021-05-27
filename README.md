@@ -84,7 +84,7 @@ Please note that this package is still under active development and has yet to r
 | Name          | Type     | Description                                | Options                              | Required | Default  |
 | ------------- | -------- | ------------------------------------------ | ------------------------------------ | -------- | -------- |
 | `scope`       | `string` | User flow type                             | `['create', 'update']`               | No       | 'create' |
-| `env`         | `string` | API environment                            | `['local', 'staging', 'production']` | Yes      | none     |
+| `env`         | `string` | API environment                            | `['local', 'sandbox', 'production']` | Yes      | none     |
 | `accessToken` | `string` | API token for authenticating requests      |                                      | Yes      | none     |
 | `client`      | `string` | Name used to reference organization in app |                                      | Yes      | none     |
 | `data`        | `object` | Data passed to the api                     |                                      | Yes      | none     |
@@ -103,7 +103,7 @@ Specifies the user flow. Defaults to `create`.
 Determines which API the Utility Connect front-end points to
 
 - `local`: Use this if you are interfacing with a local API. **You will almost never need this option.**
-- `staging`: This references our staging API. Use this in your development and staging environments.
+- `sandbox`: This references our sandbox API. Use this in your development and staging environments.
 - `production`: This references our production API. **Only use this in your production app.**
 
 #### `create` scope

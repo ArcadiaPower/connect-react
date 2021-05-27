@@ -3,7 +3,7 @@ import { number, shape, string } from 'prop-types';
 import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const config = {
-  env: 'staging',
+  env: 'sandbox',
   client: 'Test Co.',
   accessToken: 'this_is_a_super_secret_token',
 };
