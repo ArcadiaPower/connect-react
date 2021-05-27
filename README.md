@@ -20,7 +20,11 @@ yarn add @arcadia-eng/utility-connect-react
 
 # Quick Start
 
-The Utility Connect widget can be instantiated for one of two user flows: creating a new User (obtaining their credentials for the first time), or updating an existing User (changing their credentials, for example, if their utility portal rejected their credentials that were on-file). The user flow is selected with the `config.scope` parameter described in the component API Reference below.
+The Utility Connect widget can be instantiated for one of two user flows: 
+1. creating a new User (obtaining their credentials for the first time)
+2. updating an existing User (changing their credentials if Arcadia no longer has correct credentials). 
+
+The user flow is selected with the `config.scope` parameter described in the component API Reference below.
 
 Note that instantiating the Utility Connect widget requires an OAuth access token scoped to your user in order to authenticate API requests. See [Creating OAuth Tokens](https://developers.arcadia.com/#operation/createOAuthToken) for instructions. Note that the type of token differs if you are creating a user or updating a user -- see `config.accessToken` in the component API Reference below for details.
 
