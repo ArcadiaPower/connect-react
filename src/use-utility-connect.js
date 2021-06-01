@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import useScript from 'react-script-hook';
 
 const src = 'https://utility-connect-main.prod.arcadia.com/dist/v2.js';
@@ -18,6 +18,9 @@ export const useUtilityConnect = () => {
   const [loading, setLoading] = useState(false);
   const [factory, setFactory] = useState();
   const [utilityConnect, setUtilityConnect] = useState();
+
+  const [openOnScriptLoad, setOpenOnScriptLoad] = useState(false);
+  const [savedOpenParams, setSavedOpenParams] = useState();
 
   const [scriptLoading, scriptError] = useScript({
     src,
@@ -39,30 +42,41 @@ export const useUtilityConnect = () => {
     if (scriptError) setError(scriptLoadError);
   }, [scriptError, setError]);
 
-  const open = async config => {
-    if (!factory) return;
-
-    setLoading(true);
-    try {
-      const configErrors = await factory.validate(config);
-      if (configErrors) {
-        setError(getConfigError(configErrors));
-      } else {
-        const onClose = () => {
-          config?.callbacks?.onClose?.();
-          setUtilityConnect(undefined);
-        };
-
-        const callbacks = { ...(config.callbacks || {}), onClose };
-        const utilityConnect = factory.create({ ...config, callbacks });
-        setUtilityConnect(utilityConnect);
+  const open = useCallback(
+    async config => {
+      if (!factory) {
+        setSavedOpenParams(config);
+        setOpenOnScriptLoad(true);
+        return;
       }
-      setLoading(false);
-    } catch (e) {
-      setError(initializeError);
-      setLoading(false);
-    }
-  };
+
+      setLoading(true);
+      try {
+        const configErrors = await factory.validate(config);
+        if (configErrors) {
+          setError(getConfigError(configErrors));
+        } else {
+          const onClose = () => {
+            config?.callbacks?.onClose?.();
+            setUtilityConnect(undefined);
+          };
+
+          const callbacks = { ...(config.callbacks || {}), onClose };
+          const utilityConnect = factory.create({ ...config, callbacks });
+          setUtilityConnect(utilityConnect);
+        }
+        setLoading(false);
+      } catch (e) {
+        setError(initializeError);
+        setLoading(false);
+      }
+    },
+    [factory]
+  );
+
+  useEffect(() => {
+    if (factory && openOnScriptLoad) open(savedOpenParams);
+  }, [factory, openOnScriptLoad, open, savedOpenParams]);
 
   return [
     { loading: loading || scriptLoading, error: error || scriptError },
