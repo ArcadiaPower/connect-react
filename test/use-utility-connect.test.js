@@ -1,7 +1,7 @@
-import { useUtilityConnect } from '../src/use-utility-connect';
 import { act, renderHook } from '@testing-library/react-hooks';
 import useScript from 'react-script-hook';
 import { generateUseScriptMock } from './test-utils';
+import { useUtilityConnect } from '../src/use-utility-connect';
 
 jest.mock('react-script-hook', () => ({
   __esModule: true,
@@ -10,8 +10,11 @@ jest.mock('react-script-hook', () => ({
 
 describe('useUtilityConnect', () => {
   beforeEach(() => {
-    global.window = {};
     useScript.mockImplementation(generateUseScriptMock());
+  });
+
+  afterEach(() => {
+    delete global.window._ArcadiaUtilityConnect;
   });
 
   it('has the expected values on load', async () => {
@@ -32,7 +35,7 @@ describe('useUtilityConnect', () => {
     await waitFor(() => expect(result.current[0].loading).toEqual(false));
     [{ loading, error }] = result.current;
     expect(loading).toEqual(false);
-    expect(error).toMatch(/Error fetching script/);
+    expect(error.message).toMatch(/Error fetching script/);
   });
 
   it('returns the initialization error if the script loads but has trouble initializing', async () => {
@@ -118,7 +121,9 @@ describe('useUtilityConnect', () => {
       });
       const [{ loading, error }] = result.current;
       expect(loading).toEqual(false);
-      expect(error).toMatch(/Error loading Arcadia utility connect service/);
+      expect(error.message).toMatch(
+        /Error loading Arcadia utility connect service/
+      );
     });
 
     it('can pass an onClose function via the configuration to the utility connect component', async () => {
