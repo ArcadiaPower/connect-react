@@ -1,25 +1,13 @@
 import React, { useState } from 'react';
 import { useUtilityConnect } from './use-utility-connect';
 
-export const withUtilityConnect = (Component, config) => props => {
-  const [data, setData] = useState(undefined);
-  const [callbacks, setCallbacks] = useState(undefined);
-
-  const [{ loading, error }, open] = useUtilityConnect({
-    ...config,
-    data,
-    callbacks,
-  });
-
-  const ready = !loading && !error && !!data && !!callbacks;
+export const withUtilityConnect = Component => props => {
+  const [{ loading, error }, open] = useUtilityConnect();
 
   const utilityConnect = {
-    ready,
     loading,
     error,
     open,
-    setData,
-    setCallbacks,
   };
 
   return <Component {...props} utilityConnect={utilityConnect} />;

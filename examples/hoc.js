@@ -1,5 +1,5 @@
 import React from 'react';
-import { number, shape, string } from 'prop-types';
+import { bool, number, shape, string } from 'prop-types';
 import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const config = {
@@ -19,22 +19,11 @@ const data = {
 class CreateCredentials extends React.Component {
   static propTypes = {
     utilityConnect: shape({
-      ready: bool.isRequired,
+      loading: bool.isRequired,
       error: object,
       open: func.isRequired,
-      setData: func.isRequired,
-      setCallbacks: func.isRequired,
     }),
   };
-
-  componentDidMount() {
-    this.props.utilityConnect.setData(data);
-    this.props.utilityConnect.setCallbacks({
-      onEmit: this.onEmit,
-      onOpen: this.onOpen,
-      onClose: this.onClose,
-    });
-  }
 
   onEmit = ({ error, data }) => {
     if (error) {
@@ -53,18 +42,18 @@ class CreateCredentials extends React.Component {
   };
 
   render() {
-    const { ready, error, open } = this.utilityConnect;
+    const { loading, error, open } = this.props.utilityConnect;
 
     if (error) {
       return <div>Failed to load credential widget: {error.message}</div>;
     }
 
     return (
-      <button type="button" disabled={ready} onClick={() => open(config)}>
+      <button type="button" disabled={loading} onClick={() => open(config)}>
         Connect credentials
       </button>
     );
   }
 }
 
-export default withUtilityConnect(CreateCredentials, config);
+export default withUtilityConnect(CreateCredentials);
