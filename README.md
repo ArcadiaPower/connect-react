@@ -20,9 +20,10 @@ yarn add @arcadia-eng/utility-connect-react
 
 # Quick Start
 
-The Utility Connect widget can be instantiated for one of two user flows: 
+The Utility Connect widget can be instantiated for one of two user flows:
+
 1. creating a new User (obtaining their credentials for the first time)
-2. updating an existing User (changing their credentials if Arcadia no longer has correct credentials). 
+2. updating an existing User (changing their credentials if Arcadia no longer has correct credentials).
 
 The user flow is selected with the `config.scope` parameter described in the component API Reference below.
 
@@ -61,7 +62,7 @@ const config = { ... }; // See "Config Options" in the API Reference
 
 class CreateCredentials extends React.Component {
   render() {
-    const { loading, error, open } = this.utilityConnect;
+    const { loading, error, open } = this.props.utilityConnect;
 
     return (
       <button type="button" disabled={loading} onClick={() => open(config)}>
@@ -71,24 +72,24 @@ class CreateCredentials extends React.Component {
   }
 }
 
-export default withUtilityConnect(CreateCredentials, config);
+export default withUtilityConnect(CreateCredentials);
 ```
 
-# API Reference 
+# API Reference
 
 Please note that this package is still under active development and the API is subject to change.
 
 ## Config Options
 
-| Name          | Type     | Description                                | Options                              | Required | Default  |
-| ------------- | -------- | ------------------------------------------ | ------------------------------------ | -------- | -------- |
-| `scope`       | `string` | User flow type                             | `['create', 'update']`               | No       | 'create' |
-| `data`        | `object` | Data passed to the API                     | Content depends on value of `scope`  | Yes      | none     |
+| Name          | Type     | Description                                                                   | Options                              | Required | Default  |
+| ------------- | -------- | ----------------------------------------------------------------------------- | ------------------------------------ | -------- | -------- |
+| `scope`       | `string` | User flow type                                                                | `['create', 'update']`               | No       | 'create' |
+| `data`        | `object` | Data passed to the API                                                        | Content depends on value of `scope`  | Yes      | none     |
 | `accessToken` | `string` | API [OAuth token](https://developers.arcadia.com/#operation/createOAuthToken) |                                      | Yes      | none     |
-| `env`         | `string` | API environment                            | `['local', 'sandbox', 'production']` | Yes      | none     |
-| `client`      | `string` | Name used to reference organization in app |                                      | Yes      | none     |
-| `callbacks`   | `object` | Callback functions                         |                                      | No       | none     |
-| `uiTheme`     | `string` | UI color theme                             | `['light', 'dark']`                  | No       | 'light'  |
+| `env`         | `string` | API environment                                                               | `['local', 'sandbox', 'production']` | Yes      | none     |
+| `client`      | `string` | Name used to reference organization in app                                    |                                      | Yes      | none     |
+| `callbacks`   | `object` | Callback functions                                                            |                                      | No       | none     |
+| `uiTheme`     | `string` | UI color theme                                                                | `['light', 'dark']`                  | No       | 'light'  |
 
 ### `config.scope`
 
@@ -96,7 +97,6 @@ Specifies the user flow. Defaults to `create`.
 
 - `create`: Opens the Utility Connect service in the "create user" flow - input credentials will be used to create a user and corresponding utility credential record.
 - `update`: Opens the Utility Connect service in the "update utility credentials" flow - input credentials will be used to update an existing utility credential record. This flow requires that you add `user.id` and `utilityCredential.id` into the `data` object.
-
 
 ### `config.data`
 
@@ -119,14 +119,13 @@ Example `config.data` when in the "creating user" flow:
 
 Data is expected in the following format for the `create` scope:
 
-| Data field | Description       | Required |
-| --------------------- | ----------------- | -------- |
-| `user` | Object specifying the User submitting their credentials | yes |
-| `user.email`      | user's email      | yes      |
-| `user.firstName`  | user's first name | yes      |
-| `user.lastName`   | user's last name  | yes      |
-| `user.zipCode`    | user's zip code   | no       |
-
+| Data field       | Description                                             | Required |
+| ---------------- | ------------------------------------------------------- | -------- |
+| `user`           | Object specifying the User submitting their credentials | yes      |
+| `user.email`     | user's email                                            | yes      |
+| `user.firstName` | user's first name                                       | yes      |
+| `user.lastName`  | user's last name                                        | yes      |
+| `user.zipCode`   | user's zip code                                         | no       |
 
 #### `config.data` for `scope: 'update'`
 
@@ -145,11 +144,10 @@ Example `config.data` when in the "updating user" flow:
 
 Data is expected in the following format for the `update` scope:
 
-| Data Field   | Description          | Required |
-| ------------ | -------------------- | -------- |
-| `user.id `   | User ID for user being updated | yes      |
-| `utilityCredential.id `  | User's UtilityCredential ID being updated | yes      |
-
+| Data Field              | Description                               | Required |
+| ----------------------- | ----------------------------------------- | -------- |
+| `user.id `              | User ID for user being updated            | yes      |
+| `utilityCredential.id ` | User's UtilityCredential ID being updated | yes      |
 
 ### `config.accessToken`
 
@@ -160,7 +158,6 @@ Note that the type of `accessToken` to be used depends on the user flow selected
 - For `scope: 'create'` configs, the `accessToken` must have been created with `scope: 'utility_connect', grant_type: 'client_credentials'`
 - For `scope: 'update'` configs, the `accessToken` must have been created with `scope: 'utility_connect', grant_type: 'password', user_id: xxx`
 
-
 ### `config.env`
 
 Determines which API the Utility Connect front-end points to
@@ -169,11 +166,9 @@ Determines which API the Utility Connect front-end points to
 - `sandbox`: This references our sandbox API. Use this in your development, staging or test environments.
 - `production`: This references our production API. **Only use this in your production app.**
 
-
 ### `config.client`
 
 The name used to reference the client organization.
-
 
 ### `config.callbacks`
 
