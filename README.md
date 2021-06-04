@@ -60,16 +60,11 @@ import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
 const config = { ... }; // See "Config Options" in the API Reference
 
 class CreateCredentials extends React.Component {
-  componentDidMount() {
-    this.props.utilityConnect.setData({ ... });
-    this.props.utilityConnect.setCallbacks({ ... });
-  }
-
   render() {
-    const { ready, error, open } = this.utilityConnect;
+    const { loading, error, open } = this.utilityConnect;
 
     return (
-      <button type="button" disabled={ready} onClick={() => open(config)}>
+      <button type="button" disabled={loading} onClick={() => open(config)}>
         Connect credentials
       </button>
     );
