@@ -3,10 +3,12 @@ import useScript from 'react-script-hook';
 
 const src = 'https://utility-connect-main.prod.arcadia.com/dist/v2.js';
 
-const scriptLoadError =
-  'Error fetching script - please check your internet connection.';
-const initializeError =
-  'Error loading Arcadia utility connect service - we are working to fix the issue.';
+const scriptLoadError = new Error(
+  'Error fetching script - please check your internet connection.'
+);
+const initializeError = new Error(
+  'Error loading Arcadia utility connect service - we are working to fix the issue.'
+);
 
 const getConfigError = errors => {
   const message = Object.values(errors).join(' ');
@@ -32,7 +34,7 @@ export const useUtilityConnect = () => {
 
     const { _ArcadiaUtilityConnect } = window;
     if (!_ArcadiaUtilityConnect) {
-      setError(new Error(initializeError));
+      setError(initializeError);
     } else {
       setFactory(window._ArcadiaUtilityConnect);
     }
