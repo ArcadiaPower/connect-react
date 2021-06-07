@@ -8,3 +8,4 @@ Internal testing version
 
 - Errors in `use-utility-connect` now return a consistent `Error` object
 - `with-utility-connect` now matches the current implementation of `use-utility-connect`
+  - **Breaking Change**: The `ready` prop is no longer passed down by the HOC. Please use `loading` instead.
