@@ -104,8 +104,8 @@ describe('useUtilityConnect', () => {
         sampleConfig
       );
       expect(error.message).toMatch(/Error setting configuration variables/);
-      expect(error.message).toMatch(/Missing \"accessToken\" value/);
-      expect(error.message).toMatch(/Missing \"client\" value/);
+      expect(error.message).toMatch(/Missing \"utilityConnectToken\" value/);
+      expect(error.message).toMatch(/Missing \"somethingImportant\" value/);
       expect(window._ArcadiaUtilityConnect.create).not.toHaveBeenCalled();
     });
 

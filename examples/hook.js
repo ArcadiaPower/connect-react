@@ -1,42 +1,43 @@
 import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const env = 'sandbox';
-const client = 'Test Co.';
-const accessToken = 'this_is_a_super_secret_token';
+const utilityConnectToken = 'this_is_a_super_secret_token';
 
-const data = {
-  user: {
-    email: 'this_is_a_fake_email@example.com',
-    firstName: 'Falsey',
-    lastName: 'Farsicle',
-  },
+// Optional - for "create" mode you can pre-fill out a zip code
+const newCredentialData = {
+  zipCode: '11787',
 };
 
 const CreateCredentials = props => {
-  const onEmit = ({ error, data }) => {
-    if (error) {
-      // handle credential submission error here
-    } else if (data) {
-      // handle credential submission response here
-    }
+  onCredentialsSubmitted = ({ utilityCredentialId }) => {
+    // Optional - save credential id for future use
   };
 
-  const onOpen = () => {
+  onOpen = () => {
     // optional - handle widget open here
   };
 
-  const onClose = () => {
-    // optional - handle widget close here
+  onClose = ({ status }) => {
+    // optional - handle widget close here with the given statuses
+    // Statuses are 'verified', 'rejected', 'timed_out', 'pending_verification', 'no_submit', 'error'
+    switch (status) {
+      case 'verified':
+        // Move on
+        return;
+      case 'rejected':
+        // Handle rejection
+        // ...etc
+        return;
+    }
   };
 
-  const callbacks = { onEmit, onOpen, onClose };
+  const callbacks = { onCredentialsSubmitted, onOpen, onClose };
 
   const config = {
     env,
     client,
-    data,
+    newCredentialData,
     callbacks,
-    scope: 'create',
   };
 
   const [{ loading, error }, open] = useUtilityConnect();
