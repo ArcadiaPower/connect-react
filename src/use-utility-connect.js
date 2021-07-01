@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import useScript from 'react-script-hook';
 
-const src = 'https://utility-connect-main.prod.arcadia.com/dist/v2.js';
+const src = 'https://utility-connect-main.prod.arcadia.com/dist/v3.js';
 
 const scriptLoadError = new Error(
   'Error fetching script - please check your internet connection.'
@@ -19,7 +19,6 @@ export const useUtilityConnect = () => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [factory, setFactory] = useState();
-  const [utilityConnect, setUtilityConnect] = useState();
 
   const [openOnScriptLoad, setOpenOnScriptLoad] = useState(false);
   const [savedOpenParams, setSavedOpenParams] = useState();
@@ -58,14 +57,7 @@ export const useUtilityConnect = () => {
         if (configErrors) {
           setError(getConfigError(configErrors));
         } else {
-          const onClose = () => {
-            config?.callbacks?.onClose?.();
-            setUtilityConnect(undefined);
-          };
-
-          const callbacks = { ...(config.callbacks || {}), onClose };
-          const utilityConnect = factory.create({ ...config, callbacks });
-          setUtilityConnect(utilityConnect);
+          const utilityConnect = await factory.create(config);
         }
         setLoading(false);
       } catch (e) {

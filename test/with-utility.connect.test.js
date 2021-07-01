@@ -18,8 +18,7 @@ jest.mock('react-script-hook', () => ({
 
 const generateSampleConfig = () => ({
   env: 'sandbox',
-  client: 'Test Co.',
-  accessToken: 'this_is_a_super_secret_token',
+  utilityConnectToken: 'this_is_a_super_secret_token',
 });
 
 class MockCredentialComponentClass extends React.Component {
@@ -119,8 +118,8 @@ describe('withUtilityConnect', () => {
       );
       const alert = screen.getByRole('alert');
       expect(alert).toHaveTextContent(/Error setting configuration variables/);
-      expect(alert).toHaveTextContent(/Missing \"accessToken\" value/);
-      expect(alert).toHaveTextContent(/Missing \"client\" value/);
+      expect(alert).toHaveTextContent(/Missing \"utilityConnectToken\" value/);
+      expect(alert).toHaveTextContent(/Missing \"somethingImportant\" value/);
       expect(window._ArcadiaUtilityConnect.create).not.toHaveBeenCalled();
     });
 

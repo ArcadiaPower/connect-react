@@ -8,14 +8,14 @@ export const generateUseScriptMock = ({
   validationErrors = false,
 } = {}) => {
   const mockArcadiaUtilityConnect = {
-    create: jest.fn(),
-    validate: jest.fn().mockReturnValue(),
+    create: jest.fn().mockResolvedValue(),
+    validate: jest.fn().mockResolvedValue(),
   };
 
   if (validationErrors)
-    mockArcadiaUtilityConnect.validate.mockReturnValue([
-      'Missing "accessToken" value.',
-      'Missing "client" value.',
+    mockArcadiaUtilityConnect.validate.mockResolvedValue([
+      'Missing "utilityConnectToken" value.',
+      'Missing "somethingImportant" value.',
     ]);
 
   if (createError)
