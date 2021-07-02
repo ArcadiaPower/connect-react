@@ -1,6 +1,6 @@
 # @arcadia-eng/utility-connect-react
 
-Arcadia's general Developer Platform API documentation can be found at [developers.arcadia.com](https://developers.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials and create UtilityCredentials and Users that can be managed through the Developer Platform API.
+Arcadia's general Developer Platform API documentation can be found at [developers.arcadia.com](https://developers.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of their utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Platform API.
 
 This package is a React wrapper around Arcadia's Utility Connect service. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
@@ -20,9 +20,12 @@ yarn add @arcadia-eng/utility-connect-react
 
 # Quick Start
 
-The user flow is selected when the UtilityConnectToken that's eventually passed into Utility Connect is initialized by the accompanying server: if a `utility_credential_id` is provided, Utility Connect will automatically be opened in 'update' mode (where the user updates their credentials), otherwise it's opened in 'create' mode.
+Instantiating the Utility Connect component requires a Utility Connect Token in order to authenticate API requests. See [Creating Utility Connect Tokens](https://developers.arcadia.com/#section/Authentication/Utility-Connect) for instructions. Note that an Access Token will not work for this purpose.
 
-Note that instantiating the Utility Connect widget requires a Utility Connect token in order to authenticate API requests. See [Creating Utility Connect Tokens](https://developers.arcadia.com/#section/Authentication/Utility-Connect) for instructions. Note that an Access Token will not work for this purpose.
+If the Utility Connect Token is instantiated with an exisiting `utility_credential_id`, then Utility Connect will update the existing UtilityCredential. This is referred to in the documentation as 'update' mode. Otherwise, Utility Connect will create a new, unique UtilityCredential which is referred to as 'create' mode.
+
+Utility Connect automatically infers the correct user flow (either 'update' or 'create') from the Utility Connect Token. When in 'create' mode, the user will pass through the entire Utility Connect flow, including the Consent Pane (accepting terms of service), Utility Pane (selecting a utility), and Credential Pane (entering utility credentials). When in 'update' mode, the user will be immediately placed on the Credentials Pane in order to reduce user friction. 
+
 
 ## Hook implementation
 
@@ -80,13 +83,13 @@ Please note that this package is still under active development and the API is s
 | --------------------- | -------- | ----------------------------------------------------------------------------------------------- | --------------------------- | -------- | ------- |
 | `utilityConnectToken` | `string` | [Utility Connect Token](https://developers.arcadia.com/#section/Authentication/Utility-Connect) |                             | Yes      | none    |
 | `env`                 | `string` | API environment                                                                                 | `['sandbox', 'production']` | Yes      | none    |
-| `newCredentialData`   | `object` | Data used to prefill new credentials - only available in create mode                            |                             | No       | none    |
+| `newCredentialData`   | `object` | Data used to prefill new credentials - only available in 'create' mode                          |                             | No       | none    |
 | `callbacks`           | `object` | Callback functions                                                                              |                             | No       | none    |
 | `uiTheme`             | `string` | UI color theme                                                                                  | `['light', 'dark']`         | No       | 'light' |
 
 ### `config.newCredentialData`
 
-Data that would be used to pre-fill fields prior to credential submission of a new user. Only available for a Utility Connect Token in `create` mode.
+Data that would be used to pre-fill fields prior to credential submission of a new user. Only available for a Utility Connect Token in `create` mode. If this field is not `null` but the Utility Connect Token is associated with an existing UtilityCredential (ie. 'update' mode), an error will be thrown.
 
 Example `config.newCredentialData` when in the "creating user" flow:
 
@@ -104,7 +107,7 @@ Data is expected in the following format:
 
 ### `config.utilityConnectToken`
 
-An access token to create or update credentials. See [Utility Connect Auth](https://developers.arcadia.com/#section/Authentication/Utility-Connect).
+An access token to create or update credentials. See [Utility Connect Auth](https://developers.arcadia.com/#section/Authentication/Utility-Connect) for more details on how to create a Utility Connect Token.
 
 ### `config.env`
 
@@ -122,10 +125,10 @@ Callback functions triggered at key points in the Utility Connect flow. Expects 
 **`onError`**: callback function that is triggered when an error occurs during the Utility Connect flow.
 **`onClose`**: callback function that is triggered when the Utility Connect is closed. The user could have closed it by clicking outside the modal or clicking a button to dismiss the modal after an error, a successful credential validation or a timeout. Provided `status` string parameter indicates the final credential submission state when Utility Component was closed. If Utility Connect was manually closed via the `close` function, the latest credential submission state will be returned. Possible states:
 
-- `'verified'` : the credentials were verified and correct
+- `'verified'` : the credentials were confirmed to be correct
 - `'rejected'` : the credentials were confirmed to be incorrect
-- `'timed_out'`: Utility Connect times out awaiting verification of the utility credentials. In this case, if clients later receive the `UtilityCredentialRejected` webhook or confirm rejection through the `UtilityCredentials` API endpoint, client will likely want to redirect the user back Utility Connect (via in-app notifications or emails). If the user needs to update their credentials, the client should fetch a `UtilityConnectToken` with the pre-existing `utility_credential_id` so that Utility Connect opens in "update" mode.
-- `'pending_verification'`: the user submitted credentials but closed Utility Connect before the front-end could get notified about the result
+- `'timed_out'`: Utility Connect times out awaiting verification of the utility credentials. In this case, if clients later receive the `UtilityCredentialRejected` webhook or confirm rejection through the UtilityCredentials API endpoint, client will likely want to redirect the user back Utility Connect (via in-app notifications or emails). If the user needs to update their credentials, the client should fetch a `UtilityConnectToken` with the pre-existing `utility_credential_id` so that Utility Connect opens in "update" mode.
+- `'pending_verification'`: the user submitted credentials but closed Utility Connect before the component could get updated with the result
 - `'no_submit'`: the user never submitted their credentials
 - `'error'`: there was an API error during the Utility Connect flow and the user clicked a button to confirm as such and close Utility Connect
 
