@@ -1,5 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import useScript from 'react-script-hook';
+
+const MAX_POLL_NUMBER = 3;
+const POLLING_INTERVAL = 100;
 
 const src = 'https://utility-connect-main.prod.arcadia.com/dist/v3.js';
 
@@ -16,32 +19,51 @@ const getConfigError = errors => {
 };
 
 export const useUtilityConnect = () => {
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const [utilityConnectError, setUtilityConnectError] = useState();
+  const [widgetOpening, setWidgetOpening] = useState(false);
   const [factory, setFactory] = useState();
 
   const [openOnScriptLoad, setOpenOnScriptLoad] = useState(false);
   const [savedOpenParams, setSavedOpenParams] = useState();
+  const pollForFactoryTimeout = useRef(null);
+
+  const pollingCount = useRef(0);
 
   const [scriptLoading, scriptError] = useScript({
     src,
     checkForExisting: true,
   });
 
+  const pollForFactory = useCallback(() => {
+    const { _ArcadiaUtilityConnect } = window;
+    if (_ArcadiaUtilityConnect) {
+      setFactory(_ArcadiaUtilityConnect);
+      return;
+    }
+
+    if (pollingCount.current === MAX_POLL_NUMBER) {
+      pollingCount.current = 0;
+      setUtilityConnectError(initializeError);
+    } else {
+      pollingCount.current += 1;
+      pollForFactoryTimeout.current = setTimeout(
+        pollForFactory,
+        POLLING_INTERVAL
+      );
+    }
+  }, []);
+
   useEffect(() => {
     if (scriptLoading || scriptError) return;
 
-    const { _ArcadiaUtilityConnect } = window;
-    if (!_ArcadiaUtilityConnect) {
-      setError(initializeError);
-    } else {
-      setFactory(window._ArcadiaUtilityConnect);
-    }
-  }, [scriptLoading, scriptError]);
+    pollForFactory();
+
+    return () => clearTimeout(pollForFactoryTimeout.current);
+  }, [scriptLoading, scriptError, pollForFactory]);
 
   useEffect(() => {
-    if (scriptError) setError(scriptLoadError);
-  }, [scriptError, setError]);
+    if (scriptError) setUtilityConnectError(scriptLoadError);
+  }, [scriptError]);
 
   const open = useCallback(
     async config => {
@@ -51,18 +73,18 @@ export const useUtilityConnect = () => {
         return;
       }
 
-      setLoading(true);
+      setWidgetOpening(true);
       try {
         const configErrors = await factory.validate(config);
         if (configErrors) {
-          setError(getConfigError(configErrors));
+          setUtilityConnectError(getConfigError(configErrors));
         } else {
           const utilityConnect = await factory.create(config);
         }
-        setLoading(false);
+        setWidgetOpening(false);
       } catch (e) {
-        setError(initializeError);
-        setLoading(false);
+        setUtilityConnectError(initializeError);
+        setWidgetOpening(false);
       }
     },
     [factory]
@@ -72,8 +94,13 @@ export const useUtilityConnect = () => {
     if (factory && openOnScriptLoad) open(savedOpenParams);
   }, [factory, openOnScriptLoad, open, savedOpenParams]);
 
+  const error = utilityConnectError || scriptError;
+
   return [
-    { loading: loading || scriptLoading, error: error || scriptError },
+    {
+      loading: (!factory && !error) || widgetOpening,
+      error,
+    },
     open,
   ];
 };
