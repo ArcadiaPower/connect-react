@@ -56,6 +56,14 @@ export const useUtilityConnect = () => {
   useEffect(() => {
     if (scriptLoading || scriptError) return;
 
+    /**
+     * Note: 2021-07-13
+     * There is an issue with the underlying package where sometimes scriptLoading
+     * will be false while the script is still executing (https://github.com/hupe1980/react-script-hook/issues/17)
+     *
+     * Because of this issue, we should poll for the factory for a short period
+     * of time before returning an error
+     */
     pollForFactory();
 
     return () => clearTimeout(pollForFactoryTimeout.current);
