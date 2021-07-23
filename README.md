@@ -121,8 +121,11 @@ Determines which API the Utility Connect front-end points to
 Callback functions triggered at key points in the Utility Connect flow. Expects an object with key/value pairs where keys are as documented below.
 
 **`onCredentialsSubmitted`**: callback function that is triggered when the user has clicked the button to submit their credentials. Passes along an object with `utilityCredentialId` which can optionally be used by the containing application to poll the status of credential verification via the client's backend (which has awareness of the associated `client_user_id`).
+
 **`onOpen`**: callback function that is triggered when the Utility Connect component is opened.
+
 **`onError`**: callback function that is triggered when an error occurs during the Utility Connect flow.
+
 **`onClose`**: callback function that is triggered when the Utility Connect is closed. The user could have closed it by clicking outside the modal or clicking a button to dismiss the modal after an error, a successful credential validation or a timeout. Provided `status` string parameter indicates the final credential submission state when Utility Component was closed. If Utility Connect was manually closed via the `close` function, the latest credential submission state will be returned. Possible states:
 
 - `'verified'` : the credentials were confirmed to be correct
