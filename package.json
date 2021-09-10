@@ -1,6 +1,6 @@
 {
   "name": "@arcadia-eng/utility-connect-react",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "React tool for integrating with Arcadia's utility connect service",
   "main": "dist/index.js",
   "scripts": {
@@ -57,8 +57,8 @@
     "webpack-cli": "^4.3.1"
   },
   "peerDependencies": {
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": "^16.14.0 || 17.x",
+    "react-dom": "^16.14.0 || 17.x"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
