@@ -30,7 +30,7 @@ class CreateCredentials extends React.Component {
 
   onClose = ({ status }) => {
     // optional - handle widget close here with the given statuses
-    // Statuses are 'verified', 'rejected', 'timed_out', 'pending_verification', 'no_submit', 'error'
+    // Statuses are 'verified', 'rejected', 'timed_out', 'pending', 'no_submit', 'error'
     switch (status) {
       case 'verified':
         // Move on

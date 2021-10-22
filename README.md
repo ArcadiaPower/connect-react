@@ -131,7 +131,7 @@ Callback functions triggered at key points in the Utility Connect flow. Expects 
 - `'verified'` : the credentials were confirmed to be correct
 - `'rejected'` : the credentials were confirmed to be incorrect
 - `'timed_out'`: Utility Connect times out awaiting verification of the utility credentials. In this case, if clients later receive the `UtilityCredentialRejected` webhook or confirm rejection through the UtilityCredentials API endpoint, client will likely want to redirect the user back Utility Connect (via in-app notifications or emails). If the user needs to update their credentials, the client should fetch a `UtilityConnectToken` with the pre-existing `utility_credential_id` so that Utility Connect opens in "update" mode.
-- `'pending_verification'`: the user submitted credentials but closed Utility Connect before the component could get updated with the result
+- `'pending'`: the user submitted credentials but closed Utility Connect before the component could get updated with the result
 - `'no_submit'`: the user never submitted their credentials
 - `'error'`: there was an API error during the Utility Connect flow and the user clicked a button to confirm as such and close Utility Connect
 
