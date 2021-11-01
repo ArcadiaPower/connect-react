@@ -1,6 +1,6 @@
 # @arcadia-eng/connect-react
 
-Arcadia's general Developer Platform API documentation can be found at [developers.arcadia.com](https://developers.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of their utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through Arc.
+Arcadia's general Developer Platform API documentation can be found at [developers.arcadia.com](https://developers.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of their utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Arc API.
 
 This package is a React wrapper around Arc's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
@@ -125,12 +125,12 @@ Callback functions triggered at key points in the Connect flow. Expects an objec
 
 **`onClose`**: callback function that is triggered when Connect is closed. The user could have closed it by clicking outside the modal or clicking a button to dismiss the modal after an error, a successful credential validation or a timeout. Provided `status` string parameter indicates the final credential submission state when Utility Component was closed. If Connect was manually closed via the `close` function, the latest credential submission state will be returned. Possible states:
 
-- `'verified'` : the credentials were confirmed to be correct
-- `'rejected'` : the credentials were confirmed to be incorrect
+- `'verified'` : The credentials were confirmed to be correct
+- `'rejected'` : The credentials were confirmed to be incorrect
 - `'timed_out'`: Connect times out awaiting verification of the utility credentials. In this case, if clients later receive the `UtilityCredentialRejected` webhook or confirm rejection through the UtilityCredentials API endpoint, client will likely want to redirect the user back Connect (via in-app notifications or emails). If the user needs to update their credentials, the client should fetch a `UtilityConnectToken` with the pre-existing `utility_credential_id` so that Connect opens in "update" mode.
-- `'pending'`: the user submitted credentials but closed Connect before the component could get updated with the result
-- `'no_submit'`: the user never submitted their credentials
-- `'error'`: there was an API error during the Connect flow and the user clicked a button to confirm as such and close Connect
+- `'pending'`: The user submitted credentials but closed Connect before the component could get updated with the result
+- `'no_submit'`: The user never submitted their credentials
+- `'error'`: There was an API error during the Connect flow. The user clicked to confirm the error and closed Connect.
 
 ```javascript
 {

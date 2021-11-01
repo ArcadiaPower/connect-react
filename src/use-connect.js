@@ -4,7 +4,7 @@ import useScript from 'react-script-hook';
 const MAX_POLL_NUMBER = 3;
 const POLLING_INTERVAL = 100;
 
-const src = 'https://connect-main.prod.arcadia.com/dist/v3.js';
+const src = 'https://connect-main.prod.arcadia.com/dist/v4.js';
 
 const scriptLoadError = new Error(
   'Error fetching script - please check your internet connection.'
