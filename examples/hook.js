@@ -1,4 +1,4 @@
-import { useUtilityConnect } from '@arcadia-eng/utility-connect-react';
+import { useConnect } from '@arcadia-eng/utility-connect-react';
 
 const env = 'sandbox';
 const utilityConnectToken = 'this_is_a_super_secret_token';
@@ -40,7 +40,7 @@ const CreateCredentials = props => {
     callbacks,
   };
 
-  const [{ loading, error }, open] = useUtilityConnect();
+  const [{ loading, error }, open] = useConnect();
 
   if (error) {
     return <div>Failed to load credential widget: {error.message}</div>;

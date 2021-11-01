@@ -7,19 +7,19 @@ export const generateUseScriptMock = ({
   longLoad = false,
   validationErrors = false,
 } = {}) => {
-  const mockArcadiaUtilityConnect = {
+  const mockConnect = {
     create: jest.fn().mockResolvedValue(),
     validate: jest.fn().mockResolvedValue(),
   };
 
   if (validationErrors)
-    mockArcadiaUtilityConnect.validate.mockResolvedValue([
-      'Missing "utilityConnectToken" value.',
+    mockConnect.validate.mockResolvedValue([
+      'Missing "connectToken" value.',
       'Missing "somethingImportant" value.',
     ]);
 
   if (createError)
-    mockArcadiaUtilityConnect.create.mockImplementation(() => {
+    mockConnect.create.mockImplementation(() => {
       throw new Error('Oh no');
     });
 
@@ -41,7 +41,7 @@ export const generateUseScriptMock = ({
         if (throwScriptError) {
           setScriptError(new Error('Something went wrong'));
         } else if (loadArcadiaElementSuccessfully) {
-          window._ArcadiaUtilityConnect = mockArcadiaUtilityConnect;
+          window._ArcConnect = mockConnect;
         }
       };
       simulateLoad();
