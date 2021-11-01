@@ -4,13 +4,13 @@ import useScript from 'react-script-hook';
 const MAX_POLL_NUMBER = 3;
 const POLLING_INTERVAL = 100;
 
-const src = 'https://utility-connect-main.prod.arcadia.com/dist/v3.js';
+const src = 'https://connect-main.prod.arcadia.com/dist/v3.js';
 
 const scriptLoadError = new Error(
   'Error fetching script - please check your internet connection.'
 );
 const initializeError = new Error(
-  'Error loading Arcadia utility connect service - we are working to fix the issue.'
+  'Error loading Connect - we are working to fix the issue.'
 );
 
 const getConfigError = errors => {
@@ -18,7 +18,7 @@ const getConfigError = errors => {
   return new Error(`Error setting configuration variables: ${message}`);
 };
 
-export const useUtilityConnect = () => {
+export const useConnect = () => {
   const [utilityConnectError, setUtilityConnectError] = useState();
   const [widgetOpening, setWidgetOpening] = useState(false);
   const [factory, setFactory] = useState();
@@ -35,9 +35,9 @@ export const useUtilityConnect = () => {
   });
 
   const pollForFactory = useCallback(() => {
-    const { _ArcadiaUtilityConnect } = window;
-    if (_ArcadiaUtilityConnect) {
-      setFactory(_ArcadiaUtilityConnect);
+    const { _ArcConnect } = window;
+    if (_ArcConnect) {
+      setFactory(_ArcConnect);
       return;
     }
 

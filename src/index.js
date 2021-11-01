@@ -1,2 +1,2 @@
-export { useUtilityConnect } from './use-utility-connect';
-export { withUtilityConnect } from './with-utility-connect';
+export { useConnect } from './use-connect';
+export { withConnect } from './with-connect';

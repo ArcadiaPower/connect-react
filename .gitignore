@@ -4,6 +4,8 @@
 /dist/
 /coverage/
 
+.npmrc
+
 # IDE's
 .idea
 .vscode

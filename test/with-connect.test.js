@@ -9,7 +9,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import useScript from 'react-script-hook';
 import { generateUseScriptMock } from './test-utils';
-import { withUtilityConnect } from '../src/with-utility-connect';
+import { withConnect } from '../src/with-connect';
 
 jest.mock('react-script-hook', () => ({
   __esModule: true,
@@ -18,13 +18,13 @@ jest.mock('react-script-hook', () => ({
 
 const generateSampleConfig = () => ({
   env: 'sandbox',
-  utilityConnectToken: 'this_is_a_super_secret_token',
+  connectToken: 'this_is_a_super_secret_token',
 });
 
 class MockCredentialComponentClass extends React.Component {
   render() {
     const config = this.props.config ?? generateSampleConfig();
-    const { loading, error, open } = this.props.utilityConnect;
+    const { loading, error, open } = this.props.connect;
     return (
       <div>
         {loading && <div>Loading...</div>}
@@ -37,11 +37,11 @@ class MockCredentialComponentClass extends React.Component {
   }
 }
 
-const MockCredentialComponentWithHOC = withUtilityConnect(
+const MockCredentialComponentWithHOC = withConnect(
   MockCredentialComponentClass
 );
 
-describe('withUtilityConnect', () => {
+describe('withConnect', () => {
   let props;
   beforeEach(() => {
     useScript.mockImplementation(generateUseScriptMock());
@@ -49,7 +49,7 @@ describe('withUtilityConnect', () => {
   });
 
   afterEach(() => {
-    delete global.window._ArcadiaUtilityConnect;
+    delete global.window._ArcConnect;
   });
 
   it("can forward props to the component it's wrapping", () => {
@@ -82,9 +82,7 @@ describe('withUtilityConnect', () => {
     render(<MockCredentialComponentWithHOC {...props} />);
     const alert = await screen.findByRole('alert');
     expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-    expect(alert).toHaveTextContent(
-      /Error loading Arcadia utility connect service/
-    );
+    expect(alert).toHaveTextContent(/Error loading Connect/);
   });
 
   describe('calling open', () => {
@@ -102,7 +100,7 @@ describe('withUtilityConnect', () => {
     it('can call open', async () => {
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      expect(window._ArcadiaUtilityConnect.create).toHaveBeenCalledWith(
+      expect(window._ArcConnect.create).toHaveBeenCalledWith(
         expect.objectContaining(mockConfig)
       );
     });
@@ -113,14 +111,12 @@ describe('withUtilityConnect', () => {
       );
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      expect(window._ArcadiaUtilityConnect.validate).toHaveBeenCalledWith(
-        mockConfig
-      );
+      expect(window._ArcConnect.validate).toHaveBeenCalledWith(mockConfig);
       const alert = screen.getByRole('alert');
       expect(alert).toHaveTextContent(/Error setting configuration variables/);
-      expect(alert).toHaveTextContent(/Missing \"utilityConnectToken\" value/);
+      expect(alert).toHaveTextContent(/Missing \"connectToken\" value/);
       expect(alert).toHaveTextContent(/Missing \"somethingImportant\" value/);
-      expect(window._ArcadiaUtilityConnect.create).not.toHaveBeenCalled();
+      expect(window._ArcConnect.create).not.toHaveBeenCalled();
     });
 
     it("shows an error if Arcadia's create function fails for any reason", async () => {
@@ -129,13 +125,9 @@ describe('withUtilityConnect', () => {
       );
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      expect(window._ArcadiaUtilityConnect.validate).toHaveBeenCalledWith(
-        mockConfig
-      );
+      expect(window._ArcConnect.validate).toHaveBeenCalledWith(mockConfig);
       const alert = screen.getByRole('alert');
-      expect(alert).toHaveTextContent(
-        /Error loading Arcadia utility connect service/
-      );
+      expect(alert).toHaveTextContent(/Error loading Connect/);
     });
 
     it('can pass an onClose function via the configuration to the utility connect component', async () => {
@@ -144,8 +136,7 @@ describe('withUtilityConnect', () => {
 
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      const initializationObject =
-        window._ArcadiaUtilityConnect.create.mock.calls[0][0];
+      const initializationObject = window._ArcConnect.create.mock.calls[0][0];
       await act(async () => {
         await initializationObject.callbacks.onClose();
       });

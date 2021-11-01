@@ -1,7 +1,7 @@
 {
-  "name": "@arcadia-eng/utility-connect-react",
-  "version": "4.0.3",
-  "description": "React tool for integrating with Arcadia's utility connect service",
+  "name": "@arcadia-eng/connect-react",
+  "version": "5.0.0",
+  "description": "React tool for integrating with Arc Connect",
   "main": "dist/index.js",
   "scripts": {
     "docz:dev": "./node_modules/.bin/docz dev",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arcadiapower/utility-connect-react.git"
+    "url": "git+https://github.com/arcadiapower/connect-react.git"
   },
   "keywords": [
     "Arcadia"
@@ -22,9 +22,9 @@
   "author": "Arcadia",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arcadiapower/utility-connect-react/issues"
+    "url": "https://github.com/arcadiapower/connect-react/issues"
   },
-  "homepage": "https://github.com/arcadiapower/utility-connect-react#readme",
+  "homepage": "https://github.com/arcadiapower/connect-react#readme",
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-optional-chaining": "^7.12.7",
