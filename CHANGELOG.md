@@ -12,7 +12,7 @@ Internal testing version
 
 ## 4.0.0
 
-- Renamed the package from `utility-connect-react` to `connect-react`. Please reinstall from npm.
+- Renamed the package from `utility-connect-react` to `connect-react`. Please reinstall from npm `npm i @arcadia-eng/connect-react`
   - `useUtilityConnect` hook renamed to `useConnect`
   - `withUtilityConnect` HoC renamed to `withConnect`
   - `config.UtilityConnectToken` renamed to `config.ConnectToken`

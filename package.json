@@ -1,7 +1,7 @@
 {
   "name": "@arcadia-eng/connect-react",
   "version": "5.0.0",
-  "description": "React tool for integrating with Arc Connect",
+  "description": "React package for implementing Arc Connect",
   "main": "dist/index.js",
   "scripts": {
     "docz:dev": "./node_modules/.bin/docz dev",
