@@ -24,4 +24,4 @@ Internal testing version
 ## 6.0.0
 
 - New branding
-- **Breaking change**: the `uiTheme` config option is removed and will no longer do anything.
+- **Breaking change**: the `uiTheme` config option is removed.
