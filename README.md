@@ -82,7 +82,7 @@ Please note that this package is still under active development and the API is s
 | `env`               | `string` | API environment                                                                 | `['sandbox', 'production']` | Yes      | none    |
 | `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |                             | No       | none    |
 | `callbacks`         | `object` | Callback functions                                                              |                             | No       | none    |
-| `uiTheme`           | `string` | UI color theme                                                                  | `['light', 'dark']`         | No       | 'light' |
+
 
 ### `config.newCredentialData`
 
@@ -140,7 +140,3 @@ Callback functions triggered at key points in the Connect flow. Expects an objec
   onOpen: () => { ... },
 }
 ```
-
-### `config.uiTheme`
-
-Determines the UI color theme. Defaults to `light`.
