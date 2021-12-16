@@ -1,6 +1,6 @@
 # @arcadia-eng/connect-react
 
-Arcadia's general Developer Platform API documentation can be found at [developers.arcadia.com](https://developers.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of their utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Arc API.
+Arcadia's general Developer Platform API documentation can be found at [developers.arcadia.com](https://developers.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of user's utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Arc API.
 
 This package is a React wrapper around Arc's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
@@ -20,7 +20,11 @@ yarn add @arcadia-eng/connect-react
 
 # Quick Start
 
-A Connect Token is required to instantiate Connect. See [Creating Connect Tokens](https://developers.arcadia.com/#section/Authentication/Connect) for instructions. Note that a general Access Token will not work for this purpose.
+A Connect Token is required to instantiate Connect. See [Creating Connect Tokens](https://developers.arcadia.com/#section/Authentication/Connect) for instructions. Keep in mind the following:
+
+- A general Access Token will not work to instantiate Connect
+- Using sandbox API keys to create a Connect Token will create resources in the sandbox environment
+- Using production API keys to create a Connect Token will create resources in the production environment
 
 Connect Tokens can be created for a new or existing connection. Connect automatically infers the correct user flow (either 'update' or 'create') from the Connect Token. When in 'create' mode, the user will pass through the entire Connect flow, including the Consent Pane (accepting terms of service), Utility Pane (selecting a utility), and Credential Pane (entering utility credentials). When in 'update' mode, the user will bypass entry content and be placed directly on the Credentials Pane.
 
@@ -76,13 +80,12 @@ Please note that this package is still under active development and the API is s
 
 ## Config Options
 
-| Name                | Type     | Description                                                                     | Options                     | Required | Default |
-| ------------------- | -------- | ------------------------------------------------------------------------------- | --------------------------- | -------- | ------- |
-| `connectToken`      | `string` | [Connect Token](https://developers.arcadia.com/#section/Authentication/Connect) |                             | Yes      | none    |
-| `env`               | `string` | API environment                                                                 | `['sandbox', 'production']` | Yes      | none    |
-| `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |                             | No       | none    |
-| `callbacks`         | `object` | Callback functions                                                              |                             | No       | none    |
-
+| Name                | Type     | Description                                                                     | Options             | Required | Default |
+| ------------------- | -------- | ------------------------------------------------------------------------------- | ------------------- | -------- | ------- |
+| `connectToken`      | `string` | [Connect Token](https://developers.arcadia.com/#section/Authentication/Connect) |                     | Yes      | none    |
+| `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |                     | No       | none    |
+| `callbacks`         | `object` | Callback functions                                                              |                     | No       | none    |
+| `uiTheme`           | `string` | UI color theme                                                                  | `['light', 'dark']` | No       | 'light' |
 
 ### `config.newCredentialData`
 
@@ -105,13 +108,6 @@ Data is expected in the following format:
 ### `config.ConnectToken`
 
 An access token to create or update credentials. See [Connect Auth](https://developers.arcadia.com/#section/Authentication/Connect) for more details on how to create a Connect Token.
-
-### `config.env`
-
-Determines which API Connect points to
-
-- `sandbox`: This references our sandbox API. Use this in your development, staging or test environments.
-- `production`: This references our production API. **Only use this in your production app.**
 
 ### `config.callbacks`
 
