@@ -3,7 +3,6 @@ import { bool, number, shape, string } from 'prop-types';
 import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
 
 const config = {
-  env: 'sandbox',
   utilityConnectToken: 'this_is_a_super_secret_token',
   // Optional - for "create" mode you can pre-fill out a zip code
   newCredentialData: {

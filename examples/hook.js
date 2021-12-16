@@ -1,6 +1,5 @@
 import { useConnect } from '@arcadia-eng/utility-connect-react';
 
-const env = 'sandbox';
 const utilityConnectToken = 'this_is_a_super_secret_token';
 
 // Optional - for "create" mode you can pre-fill out a zip code
@@ -34,7 +33,6 @@ const CreateCredentials = props => {
   const callbacks = { onCredentialsSubmitted, onOpen, onClose };
 
   const config = {
-    env,
     client,
     newCredentialData,
     callbacks,

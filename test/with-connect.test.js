@@ -17,7 +17,6 @@ jest.mock('react-script-hook', () => ({
 }));
 
 const generateSampleConfig = () => ({
-  env: 'sandbox',
   connectToken: 'this_is_a_super_secret_token',
 });
 
