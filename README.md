@@ -95,7 +95,8 @@ Example `config.newCredentialData` when in the "creating user" flow:
 
 ```javascript
 {
-  zipCode: '11787';
+  zipCode: '11216',
+  utilityId: '2337'
 }
 ```
 
@@ -104,6 +105,7 @@ Data is expected in the following format:
 | Data field | Description     | Required |
 | ---------- | --------------- | -------- |
 | `zipCode`  | user's zip code | no       |
+| `utilityId`| [ID of the user's utility](https://developers.arcadia.com/#section/Supported-Utilities) | no |
 
 ### `config.ConnectToken`
 

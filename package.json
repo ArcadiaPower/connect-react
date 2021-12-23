@@ -1,6 +1,6 @@
 {
   "name": "@arcadia-eng/connect-react",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "React package for implementing Arc Connect",
   "main": "dist/index.js",
   "scripts": {
