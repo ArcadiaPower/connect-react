@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, number, shape, string } from 'prop-types';
-import { withUtilityConnect } from '@arcadia-eng/utility-connect-react';
+import { withUtilityConnect } from '@arcadia-eng/connect-react';
 
 const config = {
   utilityConnectToken: 'this_is_a_super_secret_token',
