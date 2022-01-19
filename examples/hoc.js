@@ -3,7 +3,7 @@ import { bool, number, shape, string } from 'prop-types';
 import { withConnect } from '@arcadia-eng/connect-react';
 
 const config = {
-  utilityConnectToken: 'this_is_a_super_secret_token',
+  connectToken: 'this_is_a_super_secret_token',
   // Optional - for "create" mode you can pre-fill out a zip code
   newCredentialData: {
     zipCode: '11787',
