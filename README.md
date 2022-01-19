@@ -80,12 +80,11 @@ Please note that this package is still under active development and the API is s
 
 ## Config Options
 
-| Name                | Type     | Description                                                                     | Options             | Required | Default |
-| ------------------- | -------- | ------------------------------------------------------------------------------- | ------------------- | -------- | ------- |
-| `connectToken`      | `string` | [Connect Token](https://developers.arcadia.com/#section/Authentication/Connect) |                     | Yes      | none    |
-| `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |                     | No       | none    |
-| `callbacks`         | `object` | Callback functions                                                              |                     | No       | none    |
-| `uiTheme`           | `string` | UI color theme                                                                  | `['light', 'dark']` | No       | 'light' |
+| Name                | Type     | Description                                                                     | Options | Required | Default |
+| ------------------- | -------- | ------------------------------------------------------------------------------- | ------- | -------- | ------- |
+| `connectToken`      | `string` | [Connect Token](https://developers.arcadia.com/#section/Authentication/Connect) |         | Yes      | none    |
+| `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |         | No       | none    |
+| `callbacks`         | `object` | Callback functions                                                              |         | No       | none    |
 
 ### `config.newCredentialData`
 
@@ -102,10 +101,10 @@ Example `config.newCredentialData` when in the "creating user" flow:
 
 Data is expected in the following format:
 
-| Data field | Description     | Required |
-| ---------- | --------------- | -------- |
-| `zipCode`  | user's zip code | no       |
-| `utilityId`| [ID of the user's utility](https://developers.arcadia.com/#section/Supported-Utilities) | no |
+| Data field  | Description                                                                             | Required |
+| ----------- | --------------------------------------------------------------------------------------- | -------- |
+| `zipCode`   | user's zip code                                                                         | no       |
+| `utilityId` | [ID of the user's utility](https://developers.arcadia.com/#section/Supported-Utilities) | no       |
 
 ### `config.ConnectToken`
 
