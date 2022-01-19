@@ -19,7 +19,7 @@ class CreateCredentials extends React.Component {
     }),
   };
 
-  onCredentialsSubmitted = ({ utility_credential_id }) => {
+  onCredentialsSubmitted = ({ utilityCredentialId }) => {
     // Optional - save credential id for future use
   };
 
