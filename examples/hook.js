@@ -1,10 +1,11 @@
 import { useConnect } from '@arcadia-eng/connect-react';
 
-const utilityConnectToken = 'this_is_a_super_secret_token';
-
-// Optional - for "create" mode you can pre-fill out a zip code
-const newCredentialData = {
-  zipCode: '11787',
+const config = {
+  connectToken: 'this_is_a_super_secret_token',
+  // Optional - for "create" mode you can pre-fill out a zip code
+  newCredentialData: {
+    zipCode: '11787',
+  },
 };
 
 const CreateCredentials = props => {
@@ -32,9 +33,8 @@ const CreateCredentials = props => {
 
   const callbacks = { onCredentialsSubmitted, onOpen, onClose };
 
-  const config = {
-    client,
-    newCredentialData,
+  const configWithCallbacks = {
+    ...config,
     callbacks,
   };
 
@@ -45,7 +45,11 @@ const CreateCredentials = props => {
   }
 
   return (
-    <button type="button" disabled={loading} onClick={() => open(config)}>
+    <button
+      type="button"
+      disabled={loading}
+      onClick={() => open(configWithCallbacks)}
+    >
       Connect credentials
     </button>
   );
