@@ -1,4 +1,4 @@
-import { useConnect } from '@arcadia-eng/utility-connect-react';
+import { useConnect } from '@arcadia-eng/connect-react';
 
 const utilityConnectToken = 'this_is_a_super_secret_token';
 
