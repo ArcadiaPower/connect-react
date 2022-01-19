@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, number, shape, string } from 'prop-types';
-import { withUtilityConnect } from '@arcadia-eng/connect-react';
+import { withConnect } from '@arcadia-eng/connect-react';
 
 const config = {
   utilityConnectToken: 'this_is_a_super_secret_token',
@@ -12,7 +12,7 @@ const config = {
 
 class CreateCredentials extends React.Component {
   static propTypes = {
-    utilityConnect: shape({
+    connect: shape({
       loading: bool.isRequired,
       error: object,
       open: func.isRequired,
@@ -42,7 +42,7 @@ class CreateCredentials extends React.Component {
   };
 
   render() {
-    const { loading, error, open } = this.props.utilityConnect;
+    const { loading, error, open } = this.props.connect;
     const configWithCallbacks = {
       ...config,
       callbacks: {
@@ -68,4 +68,4 @@ class CreateCredentials extends React.Component {
   }
 }
 
-export default withUtilityConnect(CreateCredentials);
+export default withConnect(CreateCredentials);
