@@ -141,5 +141,25 @@ describe('withConnect', () => {
       });
       expect(mockConfig.callbacks.onClose).toHaveBeenCalled();
     });
+
+    describe('on unmount', () => {
+      it('does not have any issue closing when the factory is not loaded', () => {
+        useScript.mockImplementation(generateUseScriptMock({ longLoad: true }));
+        const { unmount } = render(
+          <MockCredentialComponentWithHOC {...props} />
+        );
+        unmount();
+      });
+
+      it('can close the factory when the factory is loaded', async () => {
+        const { unmount } = render(
+          <MockCredentialComponentWithHOC {...props} />
+        );
+        await clickOpen();
+        expect(window._ArcConnect.close).toHaveBeenCalledTimes(0);
+        unmount();
+        expect(window._ArcConnect.close).toHaveBeenCalledTimes(1);
+      });
+    });
   });
 });
