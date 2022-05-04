@@ -25,3 +25,7 @@ Internal testing version
 
 - New branding
 - **Breaking change**: the `uiTheme` config option is removed.
+
+## 6.0.3
+
+- Close Connect on unmount
