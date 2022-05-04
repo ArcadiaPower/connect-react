@@ -73,6 +73,10 @@ export const useConnect = () => {
     if (scriptError) setUtilityConnectError(scriptLoadError);
   }, [scriptError]);
 
+  useEffect(() => {
+    return () => factory?.close();
+  }, [factory]);
+
   const open = useCallback(
     async config => {
       if (!factory) {

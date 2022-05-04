@@ -8,6 +8,7 @@ export const generateUseScriptMock = ({
   validationErrors = false,
 } = {}) => {
   const mockConnect = {
+    close: jest.fn(),
     create: jest.fn().mockResolvedValue(),
     validate: jest.fn().mockResolvedValue(),
   };
