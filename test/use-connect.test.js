@@ -132,5 +132,21 @@ describe('useConnect', () => {
       });
       expect(sampleConfig.callbacks.onClose).toHaveBeenCalled();
     });
+
+    describe('on unmount', () => {
+      it('does not have any issue closing when the factory is not loaded', () => {
+        useScript.mockImplementation(generateUseScriptMock({ longLoad: true }));
+        const { unmount } = renderHook(() => useConnect());
+        unmount();
+      });
+
+      it('can close the factory when the factory is loaded', async () => {
+        const { result, unmount, waitFor } = renderHook(() => useConnect());
+        await waitFor(() => expect(result.current[0].loading).toEqual(false));
+        expect(window._ArcConnect.close).toHaveBeenCalledTimes(0);
+        unmount();
+        expect(window._ArcConnect.close).toHaveBeenCalledTimes(1);
+      });
+    });
   });
 });
