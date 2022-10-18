@@ -1,6 +1,6 @@
 # @arcadia-eng/connect-react
 
-Arcadia's general Developer Platform API documentation can be found at [developers.arcadia.com](https://developers.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of user's utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Arc API.
+Arcadia's general Developer Platform API documentation can be found at [docs.arcadia.com](https://docs.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of user's utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Arc API.
 
 This package is a React wrapper around Arc's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
@@ -20,7 +20,7 @@ yarn add @arcadia-eng/connect-react
 
 # Quick Start
 
-A Connect Token is required to instantiate Connect. See [Creating Connect Tokens](https://developers.arcadia.com/#section/Authentication/Connect) for instructions. Keep in mind the following:
+A Connect Token is required to instantiate Connect. See [Getting a Connect Token to initialize Connect](https://docs.arcadia.com/docs#getting-a-connect-token-to-initialize-connect) for instructions. Keep in mind the following:
 
 - A general Access Token will not work to instantiate Connect
 - Using sandbox API keys to create a Connect Token will create resources in the sandbox environment
@@ -82,7 +82,7 @@ Please note that this package is still under active development and the API is s
 
 | Name                | Type     | Description                                                                     | Options | Required | Default |
 | ------------------- | -------- | ------------------------------------------------------------------------------- | ------- | -------- | ------- |
-| `connectToken`      | `string` | [Connect Token](https://developers.arcadia.com/#section/Authentication/Connect) |         | Yes      | none    |
+| `connectToken`      | `string` | [Connect Token](https://docs.arcadia.com/reference/createconnecttoken) |         | Yes      | none    |
 | `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |         | No       | none    |
 | `callbacks`         | `object` | Callback functions                                                              |         | No       | none    |
 
@@ -104,11 +104,11 @@ Data is expected in the following format:
 | Data field  | Description                                                                             | Required |
 | ----------- | --------------------------------------------------------------------------------------- | -------- |
 | `zipCode`   | user's zip code                                                                         | no       |
-| `utilityId` | [ID of the user's utility](https://developers.arcadia.com/#section/Supported-Utilities) | no       |
+| `utilityId` | [ID of the user's utility](https://arc.arcadia.com/coverage) | no       |
 
 ### `config.ConnectToken`
 
-An access token to create or update credentials. See [Connect Auth](https://developers.arcadia.com/#section/Authentication/Connect) for more details on how to create a Connect Token.
+An access token to create or update credentials. See [Getting a Connect Token to initialize Connect](https://docs.arcadia.com/docs#getting-a-connect-token-to-initialize-connect) for more details on how to create a Connect Token.
 
 ### `config.callbacks`
 
