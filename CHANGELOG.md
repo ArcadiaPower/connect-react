@@ -1,18 +1,17 @@
 # Changelog
 
-## 0.0.1
+### 6.0.4
 
-Internal testing version
+- Documentation updates
 
-## 3.0.0
+### 6.0.3
 
-- Errors in `use-utility-connect` now return a consistent `Error` object
-- `with-utility-connect` now matches the current implementation of `use-utility-connect`
-  - **Breaking Change**: The `ready` prop is no longer passed down by the HOC. Please use `loading` instead.
+- Close Connect on unmount
 
-## 4.0.0
+## 6.0.0
 
-- **Breaking change**: New callback and config format
+- New branding
+- **Breaking change**: the `uiTheme` config option is removed.
 
 ## 5.0.0
 
@@ -21,11 +20,17 @@ Internal testing version
   - `withUtilityConnect` HoC renamed to `withConnect`
   - `config.UtilityConnectToken` renamed to `config.ConnectToken`
 
-## 6.0.0
+## 4.0.0
 
-- New branding
-- **Breaking change**: the `uiTheme` config option is removed.
+- **Breaking change**: New callback and config format
 
-## 6.0.3
+## 3.0.0
 
-- Close Connect on unmount
+- Errors in `use-utility-connect` now return a consistent `Error` object
+- `with-utility-connect` now matches the current implementation of `use-utility-connect`
+  - **Breaking Change**: The `ready` prop is no longer passed down by the HOC. Please use `loading` instead.
+
+
+### 0.0.1
+
+Internal testing version
