@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.0.0
+
+- Fixes major issue with Connect source url
+- **Breaking change**: All prior versions will be marked as deprecated
+
 ### 6.0.4
 
 - Documentation updates
