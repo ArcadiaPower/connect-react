@@ -4,6 +4,8 @@ Arcadia's general Developer Platform API documentation can be found at [docs.arc
 
 This package is a React wrapper around Arc's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
+As an alternative to using this package, Arc’s Connect can also be presented to your user through a URL. A Connect URL can be generated through [this endpoint](https://docs.arcadia.com/reference/createconnecturl). The URL approach differs from this React package in that the URL does not have any [config options](https://docs.arcadia.com/reference/createconnecturl) and does not respond with [callbacks](https://docs.arcadia.com/reference/createconnecturl) for an application to interpret.
+
 # Installation
 
 Via npm:
