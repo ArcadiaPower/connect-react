@@ -87,7 +87,7 @@ Please note that this package is still under active development and the API is s
 | `connectToken`      | `string` | [Connect Token](https://docs.arcadia.com/reference/createconnecttoken) |         | Yes      | none    |
 | `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |         | No       | none    |
 | `callbacks`         | `object` | Callback functions                                                              |         | No       | none    |
-| `variant`           | `string` | Set to 'tariff' if using [tariff selection mode](https://docs.arcadia.com/docs/connect-tariff-selection-mode)  |'tariff' or 'connect'        | No       | none    |
+| `variant`           | `string` | Set to 'tariff' if using [tariff selection mode](https://docs.arcadia.com/docs/connect-tariff-selection-mode)  |'tariff' or 'connect'        | No       | 'connect'    |
 
 ### `config.newCredentialData`
 
