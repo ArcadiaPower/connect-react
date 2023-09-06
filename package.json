@@ -1,6 +1,6 @@
 {
   "name": "@arcadia-eng/connect-react",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "React package for implementing Arc Connect",
   "main": "dist/index.js",
   "scripts": {
@@ -57,12 +57,12 @@
     "webpack-cli": "^4.3.1"
   },
   "peerDependencies": {
-    "react": "^16.14.0 || ^17.0.0",
-    "react-dom": "^16.14.0 || ^17.0.0"
+    "react": "^16.14.0 || 17 - 18",
+    "react-dom": "^16.14.0 || 17 - 18"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react-script-hook": "^1.2.1"
+    "react-script-hook": "^1.7.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
