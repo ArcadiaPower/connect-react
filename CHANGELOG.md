@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.2.0
+
+- Updates node version to LTS 18.12.0
+
 ## 7.1.0
 
 - Updates react-script-hook to 1.7.2
