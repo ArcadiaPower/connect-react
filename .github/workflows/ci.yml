@@ -3,6 +3,8 @@ on: [push]
 jobs:
   run-ci:
     runs-on: ubuntu-latest
+    environment:
+      name: dev
     steps:
       - uses: actions/checkout@v2
 
