@@ -17,3 +17,5 @@ jobs:
 
       - name: test
         run: bin/ci/test.sh
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
