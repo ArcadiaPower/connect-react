@@ -1,0 +1,16 @@
+name: Run RSpec tests
+on: [push]
+jobs:
+  run-rspec-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        node-version-file: '.nvmrc'
+
+      - name: setup
+        run: bin/ci/setup.sh
+
+      - name: test
+        run: bin/ci/test.sh
