@@ -1,5 +1,7 @@
 #!/bin/bash
-curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > "${HOME}/bin/cc-test-reporter" && chmod +x "${HOME}/bin/cc-test-reporter"
+dir=${GITHUB_WORKSPACE:-${HOME}}
+echo $dir
+curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > "${dir}/bin/cc-test-reporter" && chmod +x "${dir}/bin/cc-test-reporter"
 
 set -euo pipefail
 IFS=$'\n\t'
