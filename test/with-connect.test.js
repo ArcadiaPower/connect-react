@@ -48,7 +48,7 @@ describe('withConnect', () => {
   });
 
   afterEach(() => {
-    delete global.window._ArcConnect;
+    delete global.window._ArcadiaConnect;
   });
 
   it("can forward props to the component it's wrapping", () => {
@@ -99,7 +99,7 @@ describe('withConnect', () => {
     it('can call open', async () => {
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      expect(window._ArcConnect.create).toHaveBeenCalledWith(
+      expect(window._ArcadiaConnect.create).toHaveBeenCalledWith(
         expect.objectContaining(mockConfig)
       );
     });
@@ -110,12 +110,12 @@ describe('withConnect', () => {
       );
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      expect(window._ArcConnect.validate).toHaveBeenCalledWith(mockConfig);
+      expect(window._ArcadiaConnect.validate).toHaveBeenCalledWith(mockConfig);
       const alert = screen.getByRole('alert');
       expect(alert).toHaveTextContent(/Error setting configuration variables/);
       expect(alert).toHaveTextContent(/Missing \"connectToken\" value/);
       expect(alert).toHaveTextContent(/Missing \"somethingImportant\" value/);
-      expect(window._ArcConnect.create).not.toHaveBeenCalled();
+      expect(window._ArcadiaConnect.create).not.toHaveBeenCalled();
     });
 
     it("shows an error if Arcadia's create function fails for any reason", async () => {
@@ -124,7 +124,7 @@ describe('withConnect', () => {
       );
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      expect(window._ArcConnect.validate).toHaveBeenCalledWith(mockConfig);
+      expect(window._ArcadiaConnect.validate).toHaveBeenCalledWith(mockConfig);
       const alert = screen.getByRole('alert');
       expect(alert).toHaveTextContent(/Error loading Connect/);
     });
@@ -135,7 +135,8 @@ describe('withConnect', () => {
 
       render(<MockCredentialComponentWithHOC {...props} />);
       await clickOpen();
-      const initializationObject = window._ArcConnect.create.mock.calls[0][0];
+      const initializationObject =
+        window._ArcadiaConnect.create.mock.calls[0][0];
       await act(async () => {
         await initializationObject.callbacks.onClose();
       });
@@ -156,9 +157,9 @@ describe('withConnect', () => {
           <MockCredentialComponentWithHOC {...props} />
         );
         await clickOpen();
-        expect(window._ArcConnect.close).toHaveBeenCalledTimes(0);
+        expect(window._ArcadiaConnect.close).toHaveBeenCalledTimes(0);
         unmount();
-        expect(window._ArcConnect.close).toHaveBeenCalledTimes(1);
+        expect(window._ArcadiaConnect.close).toHaveBeenCalledTimes(1);
       });
     });
   });
