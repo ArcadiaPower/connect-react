@@ -42,7 +42,7 @@ export const generateUseScriptMock = ({
         if (throwScriptError) {
           setScriptError(new Error('Something went wrong'));
         } else if (loadArcadiaElementSuccessfully) {
-          window._ArcConnect = mockConnect;
+          window._ArcadiaConnect = mockConnect;
         }
       };
       simulateLoad();

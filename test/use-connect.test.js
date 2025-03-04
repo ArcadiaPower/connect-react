@@ -14,7 +14,7 @@ describe('useConnect', () => {
   });
 
   afterEach(() => {
-    delete global.window._ArcConnect;
+    delete global.window._ArcadiaConnect;
   });
 
   it('has the expected values on load', async () => {
@@ -61,7 +61,7 @@ describe('useConnect', () => {
       await act(async () => {
         await open(sampleConfig);
       });
-      expect(window._ArcConnect.create).toHaveBeenCalledWith(
+      expect(window._ArcadiaConnect.create).toHaveBeenCalledWith(
         expect.objectContaining(sampleConfig)
       );
     });
@@ -76,9 +76,9 @@ describe('useConnect', () => {
       await act(async () => {
         await open(sampleConfig);
       });
-      expect(window._ArcConnect).toBeUndefined();
-      await waitFor(() => expect(window._ArcConnect).not.toBeUndefined());
-      expect(window._ArcConnect.create).toHaveBeenCalledWith(
+      expect(window._ArcadiaConnect).toBeUndefined();
+      await waitFor(() => expect(window._ArcadiaConnect).not.toBeUndefined());
+      expect(window._ArcadiaConnect.create).toHaveBeenCalledWith(
         expect.objectContaining(sampleConfig)
       );
     });
@@ -96,11 +96,11 @@ describe('useConnect', () => {
       });
       const [{ loading, error }] = result.current;
       expect(loading).toEqual(false);
-      expect(window._ArcConnect.validate).toHaveBeenCalledWith(sampleConfig);
+      expect(window._ArcadiaConnect.validate).toHaveBeenCalledWith(sampleConfig);
       expect(error.message).toMatch(/Error setting configuration variables/);
       expect(error.message).toMatch(/Missing \"connectToken\" value/);
       expect(error.message).toMatch(/Missing \"somethingImportant\" value/);
-      expect(window._ArcConnect.create).not.toHaveBeenCalled();
+      expect(window._ArcadiaConnect.create).not.toHaveBeenCalled();
     });
 
     it("shows an error if Arcadia's create function fails for any reason", async () => {
@@ -126,7 +126,7 @@ describe('useConnect', () => {
       await act(async () => {
         await open(sampleConfig);
       });
-      const initializationObject = window._ArcConnect.create.mock.calls[0][0];
+      const initializationObject = window._ArcadiaConnect.create.mock.calls[0][0];
       act(() => {
         initializationObject.callbacks.onClose();
       });
@@ -143,9 +143,9 @@ describe('useConnect', () => {
       it('can close the factory when the factory is loaded', async () => {
         const { result, unmount, waitFor } = renderHook(() => useConnect());
         await waitFor(() => expect(result.current[0].loading).toEqual(false));
-        expect(window._ArcConnect.close).toHaveBeenCalledTimes(0);
+        expect(window._ArcadiaConnect.close).toHaveBeenCalledTimes(0);
         unmount();
-        expect(window._ArcConnect.close).toHaveBeenCalledTimes(1);
+        expect(window._ArcadiaConnect.close).toHaveBeenCalledTimes(1);
       });
     });
   });

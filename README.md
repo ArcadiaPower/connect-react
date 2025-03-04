@@ -1,10 +1,12 @@
+# Please note: this package is only applicable to the Legacy Arcadia Platform.
+
 # @arcadia-eng/connect-react
 
-Arcadia's general Developer Platform API documentation can be found at [docs.arcadia.com](https://docs.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of user's utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Arc API.
+Arcadia's general Developer Platform API documentation can be found at [docs.arcadia.com](https://docs.arcadia.com). The purpose of this package is to embed a user-facing interface where your customers can securely enter their utility credentials. The submission of user's utility-related credentials will create UtilityCredentials and UtilityAccounts that can be managed through the Arcadia API.
 
-This package is a React wrapper around Arc's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
+This package is a React wrapper around Arcadia's Connect. It provides two ways to integrate the component into your React application - via hooks and via HoCs (higher order components).
 
-As an alternative to using this package, Arc’s Connect can also be presented to your user through a URL. A Connect URL can be generated through [this endpoint](https://docs.arcadia.com/reference/createconnecturl). The URL approach differs from this React package in that the URL does not have any [config options](https://github.com/ArcadiaPower/connect-react#config-options) and does not respond with [callbacks](https://github.com/ArcadiaPower/connect-react#configcallbacks) for an application to interpret.
+As an alternative to using this package, Arcadia’s Connect can also be presented to your user through a URL. A Connect URL can be generated through [this endpoint](https://docs.arcadia.com/v2022-10-13/reference/createconnecturl). The URL approach differs from this React package in that the URL does not have any [config options](https://github.com/ArcadiaPower/connect-react#config-options) and does not respond with [callbacks](https://github.com/ArcadiaPower/connect-react#configcallbacks) for an application to interpret.
 
 # Installation
 
@@ -22,7 +24,7 @@ yarn add @arcadia-eng/connect-react
 
 # Quick Start
 
-A Connect Token is required to instantiate Connect. See [Getting a Connect Token to initialize Connect](https://docs.arcadia.com/docs#getting-a-connect-token-to-initialize-connect) for instructions. Keep in mind the following:
+A Connect Token is required to instantiate Connect. See [Getting a Connect Token to initialize Connect](https://docs.arcadia.com/v2022-10-13/docs/connect-guide#getting-a-connect-token-to-initialize-connect) for instructions. Keep in mind the following:
 
 - A general Access Token will not work to instantiate Connect
 - Using sandbox API keys to create a Connect Token will create resources in the sandbox environment
@@ -84,10 +86,10 @@ Please note that this package is still under active development and the API is s
 
 | Name                | Type     | Description                                                                     | Options | Required | Default |
 | ------------------- | -------- | ------------------------------------------------------------------------------- | ------- | -------- | ------- |
-| `connectToken`      | `string` | [Connect Token](https://docs.arcadia.com/reference/createconnecttoken) |         | Yes      | none    |
+| `connectToken`      | `string` | [Connect Token](https://docs.arcadia.com/v2022-10-13/reference/createconnecttoken) |         | Yes      | none    |
 | `newCredentialData` | `object` | Data used to prefill new credentials - only available in 'create' mode          |         | No       | none    |
 | `callbacks`         | `object` | Callback functions                                                              |         | No       | none    |
-| `variant`           | `string` | Set to 'tariff' if using [tariff selection mode](https://docs.arcadia.com/docs/connect-tariff-selection-mode)  |'tariff' or 'connect'        | No       | 'connect'    |
+| `variant`           | `string` | Set to 'tariff' if using [tariff selection mode](https://docs.arcadia.com/v2022-10-13/docs/connect-tariff-selection-mode)  |'tariff' or 'connect'        | No       | 'connect'    |
 
 ### `config.newCredentialData`
 
@@ -111,7 +113,7 @@ Data is expected in the following format:
 
 ### `config.ConnectToken`
 
-An access token to create or update credentials. See [Getting a Connect Token to initialize Connect](https://docs.arcadia.com/docs#getting-a-connect-token-to-initialize-connect) for more details on how to create a Connect Token.
+An access token to create or update credentials. See [Getting a Connect Token to initialize Connect](https://docs.arcadia.com/v2022-10-13/docs/connect-guide#getting-a-connect-token-to-initialize-connect) for more details on how to create a Connect Token.
 
 ### `config.callbacks`
 

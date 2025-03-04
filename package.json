@@ -1,7 +1,7 @@
 {
   "name": "@arcadia-eng/connect-react",
   "version": "7.2.0",
-  "description": "React package for implementing Arc Connect",
+  "description": "React package for implementing Legacy Arcadia Connect",
   "main": "dist/index.js",
   "scripts": {
     "docz:dev": "./node_modules/.bin/docz dev",
